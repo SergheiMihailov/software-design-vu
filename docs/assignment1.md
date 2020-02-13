@@ -1,8 +1,7 @@
 # Assignment 1
 Maximum number of words for this document: 2500
 
-Yael
-sloopydick
+
 ## Introduction									
 Author(s): `name of the team member(s) responsible for this section`
 
