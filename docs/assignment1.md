@@ -10,10 +10,7 @@ https://www.gistoapp.com/features
 https://developer.github.com/v3/gists/
 
 ## Features
-
-### Functional features
-
-As a preamble to the table, you can discuss the main line of reasoning you applied for defining the functional features provided in the table.
+What will make our snippet manager special? How will we separate our project from the others? Our main focus will lay with usability and accessibility, to make the usage of our snippet manager as pleasant as possible.To achieve this we sought out a few main features we would like to implement in our project. The following table is ordered, starting with the most important feature, all the way down to the least important one.
 
 | ID  | Short name  | Description  |
 |---|---|---|
