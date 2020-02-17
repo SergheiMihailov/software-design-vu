@@ -28,9 +28,7 @@ What will make our snippet manager special? How will we separate our project fro
 
 
 ### Quality requirements
-Author(s): `name of the team member(s) responsible for this section`
-
-As a preamble to the table, you can discuss the main line of reasoning you followed for coming up with the quality requirements listed below.
+The usability of snippets is of course really imported for a snippet manager, therefore we reasoned allot about how we could guarantee the usability of snippets in the system. A big part of our quality requirements is therefore committed to the usability and reliability of the system.
 
 | ID  | Short name  | Quality attribute | Description  |
 |---|---|---|---|
@@ -40,11 +38,6 @@ As a preamble to the table, you can discuss the main line of reasoning you follo
 |QR3|Intuitive UI|Usability|A new user should be able to create/read/edit snippets within 5 minutes of using the tool|
 |QR4|Persistent snippet storage|Reliability|Snippets remain reliably stored in memory until deleted inside the manager or manually deleted from the filesystem|
 |QR5|Storing unsaved work|Reliability, Usability|In the case of unexpected shutdown of the process, unsaved work should be stored|
-
-
-Each quality requirement must be tagged with the corresponding quality attribute (see corresponding slides of the first lecture for knowing them).
-
-Maximum number of words for this section: 1000
 
 ### Java libraries
 | Name (with link) | Description  |
