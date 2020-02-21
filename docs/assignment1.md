@@ -18,7 +18,7 @@ Author(s):Serghei Mihailov, Bjorn Keyser, Yael Goede, Milos Delgorge
 | F1 | API to Create/Read/Update/Delete snippets | Users shall be able to easily access edit, create and delete snippets by calling the tool from the CLI using arguments. |
 | F2 | Snippet editor | Users shall be able to edit and save snippets via a basic Vim-like CLI editor with visual/insert/replace modes. |
 | F3 | Tags | Users shall be able to add tags to snippets by which will make finding snippets easier. This shall include language and whether the snippet is "starred". |
-| F5 | Search/Filter | Users can search for their snippets by content, tags, description, title, language. Like snippo -s "language:java tags:tag1,tag2 searchterm". |
+| F5 | Filter | Users can filter for their snippets by content, tags, description, title, language. Like snippo -f "language:java tags:tag1,tag2 searchterm". |
 | F6 | Configurable syntax highlighting | Users shall have their code for a specific language with highlighting of syntax that is configurable via a file (that they create or that has been provided) that maps keywords to colors. |
 | F7 | Readme/help for the tool | Users shall be able to view a manual explaining the basic commands and how to use the tool. |
 | F8 (optional) | Authentication | Users shall be able to create and use accounts where their personal protected snippets are stored. |
