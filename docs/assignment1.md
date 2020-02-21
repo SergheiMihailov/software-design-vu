@@ -20,7 +20,7 @@ Author(s):Serghei Mihailov, Bjorn Keyser, Yael Goede, Milos Delgorge
 | F3 | Tags | Users shall be able to add tags to snippets by which will make finding snippets easier. This shall include language and whether the snippet is "starred". |
 | F5 | Filter | Users can filter for their snippets by content, tags, description, title, language. Like snippo -f "language:java tags:tag1,tag2 searchterm". |
 | F6 | Configurable syntax highlighting | Users shall have their code for a specific language with highlighting of syntax that is configurable via a file (that they create or that has been provided) that maps keywords to colors. |
-| F7 | Readme/help for the tool | Users shall be able to view a manual explaining the basic commands and how to use the tool. |
+| F7 | Help | Users shall be able to access an interactive help function via the command line interface or by calling the application like "snippo \<function> --help" to get relevant documentation about a function's behavior and required arguments. |
 | F8 (optional) | Authentication | Users shall be able to create and use accounts where their personal protected snippets are stored. |
 | F9 | Snippet metadata | Users shall be able to view snippet metadata such as creation and last modification date, count of times edited or opened. |
 | F10 (optional) | Import/Export snippets | Users shall be able to import and export via a json file to reuse on a different machine using Snippo. |
