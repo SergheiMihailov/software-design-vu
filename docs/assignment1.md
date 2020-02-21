@@ -15,17 +15,17 @@ Author(s):Serghei Mihailov, Bjorn Keyser, Yael Goede, Milos Delgorge
 
 | **ID** | **Short name** | **Description** |
 | --- | --- | --- |
-| F1 | API to Create/Read/Update/Delete snippets | Users should be able to easily access edit, create and delete snippets by calling the tool from the CLI using arguments. |
-| F2 | Snippet editor | Users should be able to edit and save snippets via a basic Vim-like CLI editor with visual/insert/replace modes. |
-| F3 | Tags | Users should be able to add tags to snippets by which will make finding snippets easier. This should include language and whether the snippet is "starred". |
+| F1 | API to Create/Read/Update/Delete snippets | Users shall be able to easily access edit, create and delete snippets by calling the tool from the CLI using arguments. |
+| F2 | Snippet editor | Users shall be able to edit and save snippets via a basic Vim-like CLI editor with visual/insert/replace modes. |
+| F3 | Tags | Users shall be able to add tags to snippets by which will make finding snippets easier. This shall include language and whether the snippet is "starred". |
 | F5 | Search/Filter | Users can search for their snippets by content, tags, description, title, language. Like snippo -s "language:java tags:tag1,tag2 searchterm". |
-| F6 | Configurable syntax highlighting | Users should have their code for a specific language with highlighting of syntax that is configurable via a file (that they create or that has been provided) that maps keywords to colors. |
-| F7 | Readme/help for the tool | Users should be able to view a manual explaining the basic commands and how to use the tool. |
-| F8 (optional) | Authentication | Users should be able to create and use accounts where their personal protected snippets are stored. |
-| F9 | Snippet metadata | Users should be able to view snippet metadata such as creation and last modification date, count of times edited or opened. |
-| F10 (optional) | Import/Export snippets | Users should be able to import and export via a json file to reuse on a different machine using Snippo. |
-| F11 (optional) | Integrated with Github Gist API | Users should be able to use Snippo in conjunction with Github Gists: [https://developer.github.com/v3/gists/](https://developer.github.com/v3/gists/) |
-| F12 | Basic interactive UI in shell | On launch the program should display available commands (e.g. edit, create, delete) and execute the chosen ones until closed.  |
+| F6 | Configurable syntax highlighting | Users shall have their code for a specific language with highlighting of syntax that is configurable via a file (that they create or that has been provided) that maps keywords to colors. |
+| F7 | Readme/help for the tool | Users shall be able to view a manual explaining the basic commands and how to use the tool. |
+| F8 (optional) | Authentication | Users shall be able to create and use accounts where their personal protected snippets are stored. |
+| F9 | Snippet metadata | Users shall be able to view snippet metadata such as creation and last modification date, count of times edited or opened. |
+| F10 (optional) | Import/Export snippets | Users shall be able to import and export via a json file to reuse on a different machine using Snippo. |
+| F11 (optional) | Integrated with Github Gist API | Users shall be able to use Snippo in conjunction with Github Gists: [https://developer.github.com/v3/gists/](https://developer.github.com/v3/gists/) |
+| F12 | Basic interactive UI in shell | On launch the program shall display available commands (e.g. edit, create, delete) and execute the chosen ones until closed.  |
 
 ## Quality Requirements:
 
@@ -33,11 +33,11 @@ Author(s): Serghei Mihailov, Bjorn Keyser, Yael Goede, Milos Delgorge
 
 | **ID** | **Short name** | **Quality attribute** | **Description** |
 | --- | --- | --- | --- |
-| QR1 | Configurable language highlighting | Extensibility | It should be easy for the user to add a new code language. |
+| QR1 | Configurable language highlighting | Extensibility | It shall be easy for the user to add a new code language. |
 | QR2 | Fast search | Responsiveness | Fast search, scalable with the number and size of snippets |
-| QR3 | Intuitive UI | Usability | A new user should be able to create/read/edit snippets within 5 minutes of using the tool |
+| QR3 | Intuitive UI | Usability | A new user shall be able to create/read/edit snippets within 5 minutes of using the tool |
 | QR4 | Persistent snippet storage | Reliability | Snippets remain reliably stored in memory until deleted inside the manager or manually deleted from the filesystem |
-| QR5 | Storing unsaved work | Reliability, Usability | In the case of unexpected shutdown of the process, unsaved work should be stored |
+| QR5 | Storing unsaved work | Reliability, Usability | In the case of unexpected shutdown of the process, unsaved work shall be stored |
 
 ## Java libraries:
 
@@ -66,7 +66,7 @@ What will make our snippet manager special? How will we separate our project fro
 
 | ID  | Short name  | Description  |
 |---|---|---|
-| F1 | API to Create/Read/Update/Delete snippets|Users should be able to easily access edit, create and delete snippets|
+| F1 | API to Create/Read/Update/Delete snippets|Users shall be able to easily access edit, create and delete snippets|
 |F1.1|Snippet editor|A basic Vim-like cli editor with visual/insert/replace modes|
 |F2|Tags|Users can add tags to snippets by which will make finding snippets easier|
 |F2|Choose language|The user can choose any supported programming language to make their snippet|
@@ -85,11 +85,11 @@ The usability of snippets is of course really imported for a snippet manager, th
 | ID  | Short name  | Quality attribute | Description  |
 |---|---|---|---|
 | QR1  | Commands sanity checks | Reliability  | When the player issues a command, the syntax of the command shall always get validated against the format specified in F2 |
-|QR1|Configurable language highlighting|Extensibility|t should be easy for the user to add a new code language.|
+|QR1|Configurable language highlighting|Extensibility| It shall be easy for the user to add a new code language.|
 |QR2|Fast filtering|Responsiveness|Fast and scalable search: at most 100ms P99.9 time to filter 1k snippets by 15 criteria (+1 for each tag, search term, date etc.) |
-|QR3|Intuitive UI|Usability|A new user should be able to create/read/edit snippets within 5 minutes of using the tool|
+|QR3|Intuitive UI|Usability|A new user shall be able to create/read/edit snippets within 5 minutes of using the tool|
 |QR4|Persistent snippet storage|Reliability|Snippets remain reliably stored in memory until deleted inside the manager or manually deleted from the filesystem|
-|QR5|Storing unsaved work|Reliability, Usability|In the case of unexpected shutdown of the process, unsaved work should be stored|
+|QR5|Storing unsaved work|Reliability, Usability|In the case of unexpected shutdown of the process, unsaved work shall be stored|
 
 ### Java libraries
 | Name (with link) | Description  |
