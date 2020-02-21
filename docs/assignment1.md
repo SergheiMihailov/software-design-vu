@@ -86,7 +86,7 @@ The usability of snippets is of course really imported for a snippet manager, th
 |---|---|---|---|
 | QR1  | Commands sanity checks | Reliability  | When the player issues a command, the syntax of the command shall always get validated against the format specified in F2 |
 |QR1|Configurable language highlighting|Extensibility|t should be easy for the user to add a new code language.|
-|QR2|Fast search|Responsiveness|Fast search, scalable with the number and size of snippets|
+|QR2|Fast filtering|Responsiveness|Fast and scalable search: at most 100ms P99.9 time to filter 1k snippets by 15 criteria (+1 for each tag, search term, date etc.) |
 |QR3|Intuitive UI|Usability|A new user should be able to create/read/edit snippets within 5 minutes of using the tool|
 |QR4|Persistent snippet storage|Reliability|Snippets remain reliably stored in memory until deleted inside the manager or manually deleted from the filesystem|
 |QR5|Storing unsaved work|Reliability, Usability|In the case of unexpected shutdown of the process, unsaved work should be stored|
