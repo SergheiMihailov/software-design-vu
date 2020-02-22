@@ -1,0 +1,13 @@
+{
+  "1": {
+    "title": "testSnippet",
+    "content": "\npublic class Main {\n    public static void main (String[] args){\n        CliUI cliUI \u003d new CliUI(\"snippo.json\");\n        cliUI.uiLoop();\n    }\n}\n",
+    "language": "java",
+    "tags": [
+      "starred",
+      "test"
+    ],
+    "created": "Feb 22, 2020, 2:10:42 PM",
+    "modified": "Feb 22, 2020, 2:10:42 PM"
+  }
+}

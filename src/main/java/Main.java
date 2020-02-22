@@ -1,5 +1,6 @@
 public class Main {
     public static void main (String[] args){
-        System.out.println("Welcome to Software Design");
+        CliUI cliUI = new CliUI("snippo.json");
+        cliUI.uiLoop();
     }
 }
