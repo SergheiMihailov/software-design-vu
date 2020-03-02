@@ -28,13 +28,19 @@ This chapter contains the specification of the UML class diagram of your system,
 This class represents the snippet objects, and thus contains the meta data and original data from the snippet.
 #### Attributes
 * _id_
-    * _description_
+    * this attribute makes the snippet unique, there for the content of the snippet can be retrieved separately. 
 * _title_
+    * the title attribute gives a quick summary of the contents of the snippet, this improves the usability and retrievability of the snippet.
 * _content_
+    * this is where the actual snippet code is stored.
 * _language_
+    * This attributes specifies the language the snippet utilises.
 * _tags_
+    * This attributes specifies the tags associated with the snippet. Tags are used to retrieve and manage snippets.
 * _created_
+    * This attribute contains the time/date the snippet was originally created.
 * _modified_
+    * This attribute will be update with the current time/date when the snippet is modified. 
 #### Operations
 * _UpdateDB()_
     * _description_
