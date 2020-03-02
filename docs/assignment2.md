@@ -15,7 +15,7 @@ Maximum number of words for this document: 9000
 | F3 | Choose language | The user can choose any supported programming language to make their snippet |
 
 ### Used modeling tool
-Add here the name of the modeling tool you are using for your project.
+StarUML http://staruml.io/
 
 ## Class diagram									
 Author(s): `name of the team member(s) responsible for this section`
