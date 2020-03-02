@@ -24,6 +24,46 @@ This chapter contains the specification of the UML class diagram of your system,
 
 `Figure representing the UML class diagram`
 ![class Diagram](classDiagram.png)
+###class: Snippet
+This class represents the snippet objects, and thus contains the meta data and original data from the snippet.
+#### Attributes
+* id
+    * _description_
+* title
+* content
+* language
+* tags
+* created
+* modified
+#### Operations
+* UpdateDB()
+    * _description_
+* setTitle()
+* setLanguage()
+* setTags()
+* editContent()
+#### Associations
+* Snippet <-> SnippetDB
+    * _description_
+* Snippet <(+editedBy)> Editor
+###class: Editor
+#### Attributes
+* id
+    * _description_
+#### Operations
+* UpdateDB()
+    * _description_
+#### Associations
+
+###class: CLI User Interface
+#### Attributes
+* id
+    * _description_
+#### Operations
+* UpdateDB()
+    * _description_
+#### Associations
+
 For each class (and data type) in the class diagram you have to provide a paragraph providing the following information:
 - Brief description about what it represents
 - Brief description of the meaning of each attribute
