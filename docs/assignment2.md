@@ -27,25 +27,25 @@ This chapter contains the specification of the UML class diagram of your system,
 ###class: Snippet
 This class represents the snippet objects, and thus contains the meta data and original data from the snippet.
 #### Attributes
-* id
+* _id_
     * _description_
-* title
-* content
-* language
-* tags
-* created
-* modified
+* _title_
+* _content_
+* _language_
+* _tags_
+* _created_
+* _modified_
 #### Operations
-* UpdateDB()
+* _UpdateDB()_
     * _description_
-* setTitle()
-* setLanguage()
-* setTags()
-* editContent()
+* _setTitle()_
+* _setLanguage()_
+* _setTags()_
+* _editContent()_
 #### Associations
-* Snippet <-> SnippetDB
+* _Snippet <-> SnippetDB_
     * _description_
-* Snippet <(+editedBy)> Editor
+* _Snippet <(+editedBy)> Editor_
 ###class: Editor
 #### Attributes
 * id
