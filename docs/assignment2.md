@@ -23,7 +23,7 @@ Author(s): `name of the team member(s) responsible for this section`
 This chapter contains the specification of the UML class diagram of your system, together with a textual description of all its elements.
 
 `Figure representing the UML class diagram`
-<img src='classDiagram.png'/>
+![class Diagram](classDiagram.png)
 For each class (and data type) in the class diagram you have to provide a paragraph providing the following information:
 - Brief description about what it represents
 - Brief description of the meaning of each attribute
