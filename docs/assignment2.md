@@ -10,7 +10,9 @@ Maximum number of words for this document: 9000
 
 | ID  | Short name  | Description  |
 |---|---|---|
-| F1  | Tags | Code snippets can be tagged via freely-defined labels called tags  |
+| F1 | CRUD API | Users shall be able to easily access edit, create and delete snippets. |
+| F2  | Tags | Code snippets can be tagged via freely-defined labels called tags  |
+| F3 | Choose language | The user can choose any supported programming language to make their snippet |
 
 ### Used modeling tool
 Add here the name of the modeling tool you are using for your project.
