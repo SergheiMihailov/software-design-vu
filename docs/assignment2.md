@@ -86,7 +86,7 @@ Maximum number of words for this section: 2500
 
 ## Object diagrams								
 Author(s): `name of the team member(s) responsible for this section`
-
+![snapshot Diagram](snapshotDiagram.png)
 This chapter contains the description of a "snapshot" of the status of your system during its execution. 
 This chapter is composed of a UML object diagram of your system, together with a textual description of its key elements.
 
