@@ -5,8 +5,8 @@ public class CliUI {
     private boolean isOpen;
     private Scanner keyboard;
 
-    public CliUI(String pathToSnippoJson) {
-        this.snippetManager = new SnippetManager(pathToSnippoJson);
+    public CliUI(SnippetManager snippetManager) {
+        this.snippetManager = snippetManager;
         isOpen = true;
         keyboard = new Scanner(System.in);
     }
@@ -19,7 +19,7 @@ public class CliUI {
     }
 
     private void displayMenu() {
-        System.out.println("Menu:\n1. View all snippets\n2. Create a snippet\n3. Delete a snippet\n4. Quit");
+        System.out.println("Menu:\n1. View all snippets\n2. Create a snippet\n3. Delete a snippet\n4. Edit a snippet\n5. Filter\n6. Quit");
     }
 
     private void getAndExecuteCommand() {
@@ -29,7 +29,9 @@ public class CliUI {
             case 1: System.out.println(snippetManager.listAll()); break;
             case 2: createSnippet(); break;
             case 3: deleteSnippet(); break;
-            case 4: isOpen = false; break;
+            case 4: editSnippet(); break;
+            case 5: System.out.println(snippetManager.filter("", "", new String[]{})); break;
+            case 6: isOpen = false; break;
             default: System.out.println(input + ": please select a valid option");
         }
     }
@@ -44,24 +46,19 @@ public class CliUI {
         System.out.println("Enter the tags of the snippet, like tag1,tag2,...:");
         String[] tags = keyboard.next().split(",");
 
-        System.out.println("Enter the content of the snippet: (enter --snippo-end to indicate end of content)");
-        StringBuilder content = new StringBuilder();
-        while (keyboard.hasNext()) {
-            String input = keyboard.nextLine();
-
-            if (input.equals("--snippo-end")) {
-                break;
-            } else {
-                content.append(input).append("\n");
-            }
-        }
-
-        snippetManager.create(title, content.toString(), lang, tags);
+        Integer snippetId = snippetManager.create(title, "", lang, tags);
+        snippetManager.edit(snippetId);
     }
 
     private void deleteSnippet() {
         System.out.println("Enter the id of the snippet to delete:");
         int input = keyboard.nextInt();
         snippetManager.delete(input);
+    }
+
+    private void editSnippet() {
+        System.out.println("Enter the id of the snippet to edit");
+        Integer snippetId = keyboard.nextInt();
+        snippetManager.edit(snippetId);
     }
 }

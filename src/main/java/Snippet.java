@@ -24,6 +24,7 @@ public class Snippet {
 
     public void setTitle(String title) {
         this.title = title;
+        this.modified = new Date();
     }
 
     public String getContent() {
@@ -32,6 +33,7 @@ public class Snippet {
 
     public void setContent(String content) {
         this.content = content;
+        this.modified = new Date();
     }
 
     public String getLanguage() {
@@ -40,6 +42,7 @@ public class Snippet {
 
     public void setLanguage(String language) {
         this.language = language;
+        this.modified = new Date();
     }
 
     public String[] getTags() {
@@ -54,16 +57,8 @@ public class Snippet {
         return created;
     }
 
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
     public Date getModified() {
         return modified;
-    }
-
-    public void setModified(Date modified) {
-        this.modified = modified;
     }
 
     @Override
