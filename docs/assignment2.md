@@ -24,9 +24,8 @@ Maximum number of words for this document: 9000
 | F10 (optional) | Import/Export snippets | Users shall be able to import and export via a json file to reuse on a different machine using Snippo. |
 | F12 | Basic interactive UI in shell | On launch the program shall display available commands (e.g. edit, create, delete) and execute the chosen ones until closed.  |
 
-
 ### Used modeling tool
-Add here the name of the modeling tool you are using for your project.
+StarUML http://staruml.io/
 
 ## Class diagram									
 Author(s): `name of the team member(s) responsible for this section`
@@ -34,6 +33,52 @@ Author(s): `name of the team member(s) responsible for this section`
 This chapter contains the specification of the UML class diagram of your system, together with a textual description of all its elements.
 
 `Figure representing the UML class diagram`
+![class Diagram](classDiagram.png)
+###class: Snippet
+This class represents the snippet objects, and thus contains the meta data and original data from the snippet.
+#### Attributes
+* _id_
+    * this attribute makes the snippet unique, there for the content of the snippet can be retrieved separately. 
+* _title_
+    * the title attribute gives a quick summary of the contents of the snippet, this improves the usability and retrievability of the snippet.
+* _content_
+    * this is where the actual snippet code is stored.
+* _language_
+    * This attributes specifies the language the snippet utilises.
+* _tags_
+    * This attributes specifies the tags associated with the snippet. Tags are used to retrieve and manage snippets.
+* _created_
+    * This attribute contains the time/date the snippet was originally created.
+* _modified_
+    * This attribute will be update with the current time/date when the snippet is modified. 
+#### Operations
+* _UpdateDB()_
+    * _description_
+* _setTitle()_
+* _setLanguage()_
+* _setTags()_
+* _editContent()_
+#### Associations
+* _Snippet <-> SnippetDB_
+    * _description_
+* _Snippet <(+editedBy)> Editor_
+###class: Editor
+#### Attributes
+* id
+    * _description_
+#### Operations
+* UpdateDB()
+    * _description_
+#### Associations
+
+###class: CLI User Interface
+#### Attributes
+* id
+    * _description_
+#### Operations
+* UpdateDB()
+    * _description_
+#### Associations
 
 For each class (and data type) in the class diagram you have to provide a paragraph providing the following information:
 - Brief description about what it represents
@@ -51,7 +96,7 @@ Maximum number of words for this section: 2500
 
 ## Object diagrams								
 Author(s): `name of the team member(s) responsible for this section`
-
+![snapshot Diagram](snapshotDiagram.png)
 This chapter contains the description of a "snapshot" of the status of your system during its execution. 
 This chapter is composed of a UML object diagram of your system, together with a textual description of its key elements.
 
