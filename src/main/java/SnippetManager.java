@@ -104,6 +104,10 @@ class SnippetManager {
         );
     }
 
+    void search(){
+      return;
+    }
+
     // Returns the next available Id for a new snippet
     private int getNextId() {
         return snippets.isEmpty() ?
