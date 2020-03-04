@@ -42,6 +42,15 @@ class Editor {
         quitButton.addActionListener(new ActionListener() {
                                          @Override
                                          public void actionPerformed(ActionEvent e) {
+                                             JFrame frame2 = new JFrame();
+                                             String[] options = new String[2];
+                                             options[0] = new String("Save");
+                                             options[1] = new String("Cancel");
+                                             int test = JOptionPane.showOptionDialog(frame.getContentPane(),"Do you wan to save current content?","Save?", 0,JOptionPane.INFORMATION_MESSAGE,null,options,null);
+                                             if (test == 0) {
+                                                 snippet.setContent(getFullEditorContent());
+                                                 snippetManager.writeSnippetsToJson();
+                                             }
                                              frame.dispose();
                                          }
                                      }
