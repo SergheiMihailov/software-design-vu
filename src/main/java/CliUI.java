@@ -30,11 +30,12 @@ public class CliUI {
             case 2: createSnippet(); break;
             case 3: deleteSnippet(); break;
             case 4: editSnippet(); break;
-            case 5: System.out.println(snippetManager.filter("", "", new String[]{})); break;
+            case 5: System.out.println(snippetManager.filter("test", "", new String[]{})); break;
             case 6: isOpen = false; break;
             default: System.out.println(input + ": please select a valid option");
         }
     }
+
 
     private void createSnippet() {
         System.out.println("Enter the title of the snippet:");

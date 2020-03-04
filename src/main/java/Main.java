@@ -32,7 +32,7 @@ public class Main {
                 snippetManager.edit(Integer.parseInt(args[1]));
                 break;
             case "search":
-                snippetManager.search();
+                snippetManager.search("something");
                 break;
             default:
                 System.out.println("Unrecognized command. Exiting...");
