@@ -1,33 +1,36 @@
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-
 class SnippetManager {
-    private String pathToSnippoJson;
-    private HashMap<Integer, Snippet> snippets;
-    private Gson g = new GsonBuilder().setPrettyPrinting().create();
+    private String pathToSnippoDir;
+    private HashMap<Integer, Snippet> snippets = new HashMap<>();
 
-    SnippetManager(String pathToSnippoJson) {
-        this.pathToSnippoJson = pathToSnippoJson;
-
-        // Make sure the snippo.json file is present
-        try {
-            File snippoFile = new File(pathToSnippoJson);
-            if (snippoFile.createNewFile()) {
-                System.out.println("File created: " + snippoFile.getName());
-            }
-        } catch (IOException e) {
-            onException(e);
+    SnippetManager(String pathToSnippoDir) {
+        this.pathToSnippoDir = pathToSnippoDir;
+        // Make sure the Snippo folder is present
+        File snippoFolder = new File(pathToSnippoDir);
+        if (snippoFolder.mkdir()) {
+            System.out.println("Folder created: " + snippoFolder.getName());
         }
-        snippets = loadSnippetsFromJson() ;
+
+        loadSnippets(snippoFolder) ;
     }
+
+    private void loadSnippets(File folder) {
+        for (final File fileEntry : Objects.requireNonNull(folder.listFiles())) {
+            if (!fileEntry.isDirectory()) {
+                Integer snippetId = Integer.parseInt(fileEntry.getName());
+                Snippet loadedSnippet = JsonIO.getInstance().loadFromJson(getPathToSnippetJson(snippetId));
+                snippets.put(snippetId, loadedSnippet);
+            }
+        }
+    }
+
+    private String getPathToSnippetJson(Integer snippetId) {
+        return pathToSnippoDir + "/" + snippetId;
+    }
+
 
     private String listSnippets(Map<Integer, Snippet> snippetsToList) {
         StringBuilder response = new StringBuilder("All snippetsToList: \n");
@@ -43,20 +46,12 @@ class SnippetManager {
         return listSnippets(snippets);
     }
 
-    void deleteAll() {
-        snippets.clear();
-
-        writeSnippetsToJson();
-    }
-
     Integer create(String title, String content, String language, String[] tags) {
         Integer newSnippetId = getNextId();
         snippets.put(
                 newSnippetId,
-                new Snippet(title, content, language, tags)
+                new Snippet(getPathToSnippetJson(newSnippetId), title, content, language, tags)
         );
-
-        writeSnippetsToJson();
 
         return newSnippetId;
     }
@@ -69,23 +64,13 @@ class SnippetManager {
         }
     }
 
-    void update(Integer id, Snippet snippet) {
-        snippets.put(id, snippet);
-
-        writeSnippetsToJson();
-    }
-
     void delete(Integer id) {
         snippets.remove(id);
-
-        writeSnippetsToJson();
     }
 
-    synchronized void edit(Integer id) {
+    void edit(Integer id) {
         Snippet snippetToEdit = snippets.get(id);
-        new Editor(snippetToEdit, this);
-
-        writeSnippetsToJson();
+        new Editor(snippetToEdit);
     }
 
     String filter(String wordToContain, String language, String[] tags) {
@@ -108,40 +93,5 @@ class SnippetManager {
     private int getNextId() {
         return snippets.isEmpty() ?
                 1 : Collections.max(snippets.keySet())+1;
-    }
-
-    private HashMap<Integer, Snippet> loadSnippetsFromJson() {
-        StringBuilder loadedJson = new StringBuilder();
-        try {
-            File snippoFile = new File(pathToSnippoJson);
-            Scanner scanner = new Scanner(snippoFile);
-            while (scanner.hasNextLine()) {
-                loadedJson.append(scanner.nextLine());
-            }
-            scanner.close();
-        } catch (FileNotFoundException e) {
-            onException(e);
-        }
-
-        if (loadedJson.length() == 0) {
-            return new HashMap<>();
-        } else {
-            return g.fromJson(loadedJson.toString(), new TypeToken<HashMap<Integer, Snippet>>() {}.getType());
-        }
-    }
-
-    public void writeSnippetsToJson() {
-        // Overwrite the contents of the snippo.json file with the current state.
-        try (PrintWriter out = new PrintWriter(pathToSnippoJson)) {
-            out.println(g.toJson(snippets, new TypeToken<HashMap<Integer, Snippet>>() {
-            }.getType()));
-        } catch (FileNotFoundException e) {
-            onException(e);
-        }
-    }
-
-    void onException(Exception e) {
-        System.out.println("An error occurred.");
-        e.printStackTrace();
     }
 }

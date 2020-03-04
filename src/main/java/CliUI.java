@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
-public class CliUI {
+class CliUI {
     private SnippetManager snippetManager;
     private boolean isOpen;
     private Scanner keyboard;
 
-    public CliUI(SnippetManager snippetManager) {
+    CliUI(SnippetManager snippetManager) {
         this.snippetManager = snippetManager;
         isOpen = true;
         keyboard = new Scanner(System.in);

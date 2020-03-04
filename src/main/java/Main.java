@@ -1,6 +1,7 @@
 public class Main {
     public static void main (String[] args){
-        SnippetManager snippetManager = new SnippetManager("snippo.json");
+        SnippetManager snippetManager = new SnippetManager("snippo");
+        new JsonIO();
 
         if (args.length == 0) {
             CliUI cliUI = new CliUI(snippetManager); cliUI.uiLoop();
@@ -14,10 +15,6 @@ public class Main {
             case "read":
                 String snippetData = snippetManager.read(Integer.parseInt(args[1]));
                 System.out.println(snippetData);
-                break;
-            case "update":
-                Snippet updatedSnippet  = new Snippet(args[2], args[3], args[4], args[5].split(","));
-                snippetManager.update(Integer.parseInt(args[1]), updatedSnippet);
                 break;
             case "delete":
                 snippetManager.delete(Integer.parseInt(args[1]));

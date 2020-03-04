@@ -3,13 +3,12 @@ import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
-import java.awt.event.*;
 
 class Editor {
     private JFrame frame;
     private RSyntaxTextArea textArea;
 
-    Editor(Snippet snippet, SnippetManager snippetManager) {
+    Editor(Snippet snippet) {
         frame = new JFrame("Snippo: Editing " + snippet.getTitle());
         textArea = new RSyntaxTextArea(snippet.getContent());
         JMenuBar menuBar = new JMenuBar();
@@ -30,24 +29,14 @@ class Editor {
         frame.setVisible(true);
         frame.requestFocus();
 
-        saveButton.addActionListener(new ActionListener() {
-                                         @Override
-                                         public void actionPerformed(ActionEvent e) {
-                                             snippet.setContent(getFullEditorContent());
-                                             snippetManager.writeSnippetsToJson();
-                                         }
-                                     }
-        );
+        saveButton.addActionListener(e -> {
+            snippet.setContent(getFullEditorContent());
+            System.out.println("saved");
+        });
 
-        quitButton.addActionListener(new ActionListener() {
-                                         @Override
-                                         public void actionPerformed(ActionEvent e) {
-                                             frame.dispose();
-                                         }
-                                     }
-        );
+        quitButton.addActionListener(e -> frame.dispose());
 
-        textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
+        textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_PYTHON);
     }
 
     private String getFullEditorContent() {

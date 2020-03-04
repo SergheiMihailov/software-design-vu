@@ -2,6 +2,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 public class Snippet {
+    private String pathToJson;
     private String title;
     private String content;
     private String language;
@@ -9,55 +10,68 @@ public class Snippet {
     private Date created;
     private Date modified;
 
-    public Snippet(String title, String content, String language, String[] tags) {
+    Snippet(String pathToJson, String title, String content, String language, String[] tags) {
+        this.pathToJson = pathToJson;
         this.title = title;
         this.content = content;
         this.language = language;
         this.tags = tags;
         this.created = new Date();
         this.modified = new Date();
+
+        writeSnippetToJson();
     }
 
-    public String getTitle() {
+    private void writeSnippetToJson() {
+        JsonIO.getInstance().writeToJson(pathToJson, this);
+    }
+
+    private void onModification() {
+        this.modified = new Date();
+        writeSnippetToJson();
+    }
+
+    String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    void setTitle(String title) {
         this.title = title;
-        this.modified = new Date();
+        onModification();
     }
 
-    public String getContent() {
+    String getContent() {
         return content;
     }
 
-    public void setContent(String content) {
+    void setContent(String content) {
         this.content = content;
-        this.modified = new Date();
+        onModification();
     }
 
-    public String getLanguage() {
+    String getLanguage() {
         return language;
     }
 
-    public void setLanguage(String language) {
+    void setLanguage(String language) {
         this.language = language;
-        this.modified = new Date();
+        onModification();
     }
 
-    public String[] getTags() {
+    String[] getTags() {
         return tags;
     }
 
-    public void setTags(String[] tags) {
+    void setTags(String[] tags) {
         this.tags = tags;
+        onModification();
     }
 
-    public Date getCreated() {
+    Date getCreated() {
         return created;
     }
 
-    public Date getModified() {
+    Date getModified() {
         return modified;
     }
 
