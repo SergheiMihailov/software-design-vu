@@ -62,7 +62,7 @@ This class represents the snippet objects, and thus contains the meta data and o
 * _Snippet <-> SnippetDB_
     * _description_
 * _Snippet <(+editedBy)> Editor_
-###class: Editor
+### class: Editor
 #### Attributes
 * id
     * _description_
@@ -71,7 +71,7 @@ This class represents the snippet objects, and thus contains the meta data and o
     * _description_
 #### Associations
 
-###class: CLI User Interface
+### class: CLI User Interface
 #### Attributes
 * id
     * _description_
@@ -146,16 +146,16 @@ In this chapter you will describe the following aspects of your project:
 - the location of the Jar file for directly executing your system;
 - the 30-seconds video showing the execution of your system (you can embed the video directly in your md file on GitHub).
 
-###Strategy
+### Strategy
 To make sure our implementation is consistent with the presented uml diagrams, we iteratively implemented the features, classes and quality requirements.
 
-###Key Solution
+### Key Solution
 
-###location of the main Java class
+### location of the main Java class
 
-###Location of the Jar file
+### Location of the Jar file
 
-###30-second video
+### 30-second video
 
 IMPORTANT: remember that your implementation must be consistent with your UML models. Also, your implementation must run without the need from any other external software or tool. Failing to meet this requirement means 0 points for the implementation part of your project.
 
