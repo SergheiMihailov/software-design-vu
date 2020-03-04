@@ -34,7 +34,7 @@ This chapter contains the specification of the UML class diagram of your system,
 
 `Figure representing the UML class diagram`
 ![class Diagram](classDiagram.png)
-###class: Snippet
+### class: Snippet
 This class represents the snippet objects, and thus contains the meta data and original data from the snippet.
 #### Attributes
 * _id_
