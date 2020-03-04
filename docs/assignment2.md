@@ -95,14 +95,16 @@ In this document you have to adhere to the following formatting conventions:
 Maximum number of words for this section: 2500
 
 ## Object diagrams								
-Author(s): `name of the team member(s) responsible for this section`
-![snapshot Diagram](snapshotDiagram.png)
-This chapter contains the description of a "s  napshot" of the status of your system during its execution. 
+Author(s): Yael Goede
+
+This chapter contains the description of a "snapshot" of the status of your system during its execution. 
 This chapter is composed of a UML object diagram of your system, together with a textual description of its key elements.
 
 `Figure representing the UML class diagram`
-  
+![snapshot Diagram](snapshotDiagram.png)
 `Textual description`
+In the diagram above a snapshot of the system is shown where the database class is filled with 4 snippets. All snippets have a unique id which makes them unique from each other. Further more all fields are filled with the required information, such as the language, tags and content field. 
+The content field contains the actual code used as snippet by the user. The language field specifies the programming language which is valid for the content field. This field enables features such as the text highlighting feature, which is language specific.
 
 Maximum number of words for this section: 500
 
