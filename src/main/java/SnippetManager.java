@@ -89,6 +89,18 @@ class SnippetManager {
         );
     }
 
+     String search(String searchTerm){
+         return listSnippets(
+                 snippets.entrySet()
+                         .stream()
+                         .filter(
+                                 entry -> entry.getValue().getTitle().contains(searchTerm) ||
+                                         entry.getValue().getContent().contains(searchTerm)
+                         )
+                         .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
+         );
+    }
+
     // Returns the next available Id for a new snippet
     private int getNextId() {
         return snippets.isEmpty() ?

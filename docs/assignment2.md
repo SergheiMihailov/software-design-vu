@@ -34,7 +34,7 @@ This chapter contains the specification of the UML class diagram of your system,
 
 `Figure representing the UML class diagram`
 ![class Diagram](classDiagram.png)
-###class: Snippet
+### class: Snippet
 This class represents the snippet objects, and thus contains the meta data and original data from the snippet.
 #### Attributes
 * _id_
@@ -62,7 +62,7 @@ This class represents the snippet objects, and thus contains the meta data and o
 * _Snippet <-> SnippetDB_
     * _description_
 * _Snippet <(+editedBy)> Editor_
-###class: Editor
+### class: Editor
 #### Attributes
 * id
     * _description_
@@ -71,7 +71,7 @@ This class represents the snippet objects, and thus contains the meta data and o
     * _description_
 #### Associations
 
-###class: CLI User Interface
+### class: CLI User Interface
 #### Attributes
 * id
     * _description_
@@ -95,14 +95,16 @@ In this document you have to adhere to the following formatting conventions:
 Maximum number of words for this section: 2500
 
 ## Object diagrams								
-Author(s): `name of the team member(s) responsible for this section`
-![snapshot Diagram](snapshotDiagram.png)
+Author(s): Yael Goede
+
 This chapter contains the description of a "snapshot" of the status of your system during its execution. 
 This chapter is composed of a UML object diagram of your system, together with a textual description of its key elements.
 
 `Figure representing the UML class diagram`
-  
+![snapshot Diagram](snapshotDiagram.png)
 `Textual description`
+In the diagram above a snapshot of the system is shown where the database class is filled with 4 snippets. All snippets have a unique id which makes them unique from each other. Further more all fields are filled with the required information, such as the language, tags and content field. 
+The content field contains the actual code used as snippet by the user. The language field specifies the programming language which is valid for the content field. This field enables features such as the text highlighting feature, which is language specific.
 
 Maximum number of words for this section: 500
 
@@ -143,6 +145,17 @@ In this chapter you will describe the following aspects of your project:
 - the location of the main Java class needed for executing your system in your source code;
 - the location of the Jar file for directly executing your system;
 - the 30-seconds video showing the execution of your system (you can embed the video directly in your md file on GitHub).
+
+### Strategy
+To make sure our implementation is consistent with the presented uml diagrams, we iteratively implemented the features, classes and quality requirements.
+
+### Key Solution
+
+### location of the main Java class
+
+### Location of the Jar file
+
+### 30-second video
 
 IMPORTANT: remember that your implementation must be consistent with your UML models. Also, your implementation must run without the need from any other external software or tool. Failing to meet this requirement means 0 points for the implementation part of your project.
 

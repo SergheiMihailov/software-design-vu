@@ -28,6 +28,9 @@ public class Main {
             case "edit":
                 snippetManager.edit(Integer.parseInt(args[1]));
                 break;
+            case "search":
+                snippetManager.search("something");
+                break;
             default:
                 System.out.println("Unrecognized command. Exiting...");
                 break;

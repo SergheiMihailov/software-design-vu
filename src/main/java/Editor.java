@@ -36,7 +36,7 @@ class Editor {
 
         quitButton.addActionListener(e -> frame.dispose());
 
-        textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_PYTHON);
+        textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
     }
 
     private String getFullEditorContent() {
