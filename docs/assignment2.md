@@ -28,7 +28,7 @@ Maximum number of words for this document: 9000
 StarUML http://staruml.io/
 
 ## Class diagram									
-Author(s): `name of the team member(s) responsible for this section`
+Author(s): Yael Goede
 
 This chapter contains the specification of the UML class diagram of your system, together with a textual description of all its elements.
 
@@ -37,7 +37,7 @@ This chapter contains the specification of the UML class diagram of your system,
 ### class: Snippet
 This class represents the snippet objects, and thus contains the meta data and original data from the snippet.
 #### Attributes
-* _id_
+* _pathToJson_
     * this attribute makes the snippet unique, there for the content of the snippet can be retrieved separately. 
 * _title_
     * the title attribute gives a quick summary of the contents of the snippet, this improves the usability and retrievability of the snippet.
@@ -52,34 +52,155 @@ This class represents the snippet objects, and thus contains the meta data and o
 * _modified_
     * This attribute will be update with the current time/date when the snippet is modified. 
 #### Operations
-* _UpdateDB()_
-    * _description_
-* _setTitle()_
-* _setLanguage()_
-* _setTags()_
-* _editContent()_
+* _Snippet(in pathToJson:String, in title :String, in content :String, in language :String, in tags :String[*])_
+    * this is the constructor method of the snippet class
+* _writeSnippetToJson(): void_
+    * converts the snippet object into json format
+* _onModification(): void_
+    * updated the modification date field of the modified snippet
+* _getTitle(): String_   
+    * Returns the title of the current snippet.
+* _setTitle(in title:String): void_
+    * Set the title of the current snippet.
+* _getContent(): String_
+    * returns the content field of the current snippet object.
+* _setContent(in content:String): void_
+    * sets the content field of the current snippet object.
+* _getLanguage(): String_
+    * returns the language field
+* _setLanguage(in language:String): void_
+    *
+* _getTags(): String_
+    *
+* _setTags(in tags:String[*]): void_
+    *
+* _getCreated(): Date_
+    *
+* _getModified(): Date_
+    *
+* _toString(): String_
+    * Combines all the field of the snippet object into a readable String.
 #### Associations
-* _Snippet <-> SnippetDB_
-    * _description_
-* _Snippet <(+editedBy)> Editor_
+* _Snippet <-> JsonIO_
+    * description
+* _Snippet < snippetManager_
+    *
 ### class: Editor
+This class takes care of the editor part, meaning syntax highlighting and editing the snippet content. The editor class is in a directed relation, only with the snippetManager class.
 #### Attributes
-* id
-    * _description_
+* _frame: JFrame_
+    * description
+* _textArea: RSyntaxTextArea_
+    *
+* _saveButton: JMenuItem_
+    *
+* _quitButton: JMenuItem_
+    *
+* _menu: JMenu_
+    *
+* _menuBar: JMenuBar_
+    *
 #### Operations
-* UpdateDB()
-    * _description_
+* _savebutton.actionListener()_
+    * This method Listens for clicks on the savebutton and triggers the required actions onclick.
+* _quitButton.actionListener()_
+    *
+* _getFullEditorContent(): String_
+    * This operation returns all the content in the textarea field currently in the editor.
 #### Associations
+* _Editor < snippetManager_
+    *
 
-### class: CLI User Interface
+### class: CliUI
+This class implements the UI, and thus controls the navigation within the menu and further actions with the program by the user.
 #### Attributes
-* id
-    * _description_
+* _snippetManager: snippetManager_
+    * contains the snippetManager object
+* _isOpen: boolean_
+    * Keeps track of the current state of the application.
+* _keyBoard: Scanner_
+    * Contains a scanner object for reading user input.
 #### Operations
-* UpdateDB()
-    * _description_
+* _CliUI()_
+    * Constructor function
+* _uiLoop(): void_
+    *
+* _displaymenu(): void_
+    *
+* _getAndExecuteCommand(): void_
+    *
+* _createSnippet(): void_
+    *
+* _deleteSnippet(): void_
+    *
+* _editSnippet(): void_
+    *
 #### Associations
+* _CliUI < Main_
+    *   
+ 
+### class: snippetManager
+This class keeps track of all the snippets and is the only class able to modify the snippets.
+#### Attributes
+* _pathToSnippoDir: String_
+    * Contains the path to the directory where all snippets are stored.
+* _snippets: HashMap<Integer, Snippet>_
+    * Keeps track of all snippets currently in the manager.
+#### Operations
+* _snippetManager(in pathToSnippoDir:String)_
+    * Constructor function
+* _loadSnippets(in folder:File): void_
+    *
+* _getPathToSnippetJson(in snippetId :Integer): String_
+    *
+* _listSnippets(in snippetsToList:Map): String_
+    *
+* _listAll(): String_
+    *
+* _create(in title:String, in content:String, in language:String, in tags :String[*]): Integer_
+    *
+* _read(in id:Integer): String_
+    *
+* _delete(in id:Integer): void_
+    *
+* _edit(in id:Integer): void_
+    *
+* _filter(in wordToContain:String, in language:String, in tags:String[*]): String_
+    * 
+* _search(in searchTerm:String): String_
+    *
+* _getNextId(): Int_
+    *
+#### Associations
+* _snippetManager < Main_
+    *  
+* _snippetManager > Editor_
+    *
+* _snippetManager > Snippet_
+    *
 
+### class: JsonIO
+This class takes care of the conversion between string type and Json type using the GSON library from google.
+#### Attributes
+* _g: Gson_
+    * contains the Gson object
+#### Operations
+* _getInstance(): JsonIO_
+    * Constructor function
+* _writeToJson(in pathToJson:String, in object :Object): void_
+    *
+* _loadFromJson(in pathToJson:String): Snippet_
+    *
+* _onException(in e:Exception): void_
+    *
+* _JsonIO()_
+    *
+#### Associations
+* _JsonIO < Main_
+    *  
+* _JsonIO > Snippet_
+    *
+    
 For each class (and data type) in the class diagram you have to provide a paragraph providing the following information:
 - Brief description about what it represents
 - Brief description of the meaning of each attribute
@@ -147,11 +268,13 @@ In this chapter you will describe the following aspects of your project:
 - the 30-seconds video showing the execution of your system (you can embed the video directly in your md file on GitHub).
 
 ### Strategy
-To make sure our implementation is consistent with the presented uml diagrams, we iteratively implemented the features, classes and quality requirements.
+To make sure our implementation is consistent with the presented uml diagrams, we iteratively implemented the features, classes and quality requirements. By using the agile development method our team could track open tasks through the scrumboard available on the github platform.
 
 ### Key Solution
+To keep us from reinventing the wheel, our implementation tries to use as many external libraries as possible. For example, our dynamic text highlighting feature is implemented using an external syntaxhighlighting library.
 
 ### location of the main Java class
+_src/main/java/Main.java_
 
 ### Location of the Jar file
 
