@@ -29,6 +29,7 @@ StarUML http://staruml.io/
 
 ## Class diagram									
 Author(s): Yael Goede
+
 This chapter contains the specification of the UML class diagram of your system, together with a textual description of all its elements.
 
 `Figure representing the UML class diagram`
