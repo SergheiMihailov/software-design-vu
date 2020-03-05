@@ -86,6 +86,7 @@ This class represents the snippet objects, and thus contains the meta data and o
 * _Snippet < snippetManager_
     *
 ### class: Editor
+This class takes care of the editor part, meaning syntax highlighting and editing the snippet content. The editor class is in a directed relation, only with the snippetManager class.
 #### Attributes
 * _frame: JFrame_
     * description
@@ -111,6 +112,7 @@ This class represents the snippet objects, and thus contains the meta data and o
     *
 
 ### class: CliUI
+This class implements the UI, and thus controls the navigation within the menu and further actions with the program by the user.
 #### Attributes
 * _snippetManager: snippetManager_
     * contains the snippetManager object
@@ -138,6 +140,7 @@ This class represents the snippet objects, and thus contains the meta data and o
     *   
  
 ### class: snippetManager
+This class keeps track of all the snippets and is the only class able to modify the snippets.
 #### Attributes
 * _pathToSnippoDir: String_
     * Contains the path to the directory where all snippets are stored.
@@ -177,31 +180,27 @@ This class represents the snippet objects, and thus contains the meta data and o
     *
 
 ### class: JsonIO
+This class takes care of the conversion between string type and Json type using the GSON library from google.
 #### Attributes
-* _snippetManager: snippetManager_
-    * contains the snippetManager object
-* _isOpen: boolean_
-    * Keeps track of the current state of the application.
-* _keyBoard: Scanner_
-    * Contains a scanner object for reading user input.
+* _g: Gson_
+    * contains the Gson object
 #### Operations
-* _CliUI()_
+* _getInstance(): JsonIO_
     * Constructor function
-* _uiLoop(): void_
+* _writeToJson(in pathToJson:String, in object :Object): void_
     *
-* _displaymenu(): void_
+* _loadFromJson(in pathToJson:String): Snippet_
     *
-* _getAndExecuteCommand(): void_
+* _onException(in e:Exception): void_
     *
-* _createSnippet(): void_
-    *
-* _deleteSnippet(): void_
-    *
-* _editSnippet(): void_
+* _JsonIO()_
     *
 #### Associations
-* _CliUI < Main_
+* _JsonIO < Main_
     *  
+* _JsonIO > Snippet_
+    *
+    
 For each class (and data type) in the class diagram you have to provide a paragraph providing the following information:
 - Brief description about what it represents
 - Brief description of the meaning of each attribute
