@@ -28,8 +28,7 @@ Maximum number of words for this document: 9000
 StarUML http://staruml.io/
 
 ## Class diagram									
-Author(s): `name of the team member(s) responsible for this section`
-
+Author(s): Yael Goede
 This chapter contains the specification of the UML class diagram of your system, together with a textual description of all its elements.
 
 `Figure representing the UML class diagram`
