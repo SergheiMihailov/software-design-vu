@@ -110,15 +110,98 @@ This class represents the snippet objects, and thus contains the meta data and o
 * _Editor < snippetManager_
     *
 
-### class: CLI User Interface
+### class: CliUI
 #### Attributes
-* id
-    * _description_
+* _snippetManager: snippetManager_
+    * contains the snippetManager object
+* _isOpen: boolean_
+    * Keeps track of the current state of the application.
+* _keyBoard: Scanner_
+    * Contains a scanner object for reading user input.
 #### Operations
-* UpdateDB()
-    * _description_
+* _CliUI()_
+    * Constructor function
+* _uiLoop(): void_
+    *
+* _displaymenu(): void_
+    *
+* _getAndExecuteCommand(): void_
+    *
+* _createSnippet(): void_
+    *
+* _deleteSnippet(): void_
+    *
+* _editSnippet(): void_
+    *
 #### Associations
+* _CliUI < Main_
+    *   
+ 
+### class: snippetManager
+#### Attributes
+* _pathToSnippoDir: String_
+    * Contains the path to the directory where all snippets are stored.
+* _snippets: HashMap<Integer, Snippet>_
+    * Keeps track of all snippets currently in the manager.
+#### Operations
+* _snippetManager(in pathToSnippoDir:String)_
+    * Constructor function
+* _loadSnippets(in folder:File): void_
+    *
+* _getPathToSnippetJson(in snippetId :Integer): String_
+    *
+* _listSnippets(in snippetsToList:Map): String_
+    *
+* _listAll(): String_
+    *
+* _create(in title:String, in content:String, in language:String, in tags :String[*]): Integer_
+    *
+* _read(in id:Integer): String_
+    *
+* _delete(in id:Integer): void_
+    *
+* _edit(in id:Integer): void_
+    *
+* _filter(in wordToContain:String, in language:String, in tags:String[*]): String_
+    * 
+* _search(in searchTerm:String): String_
+    *
+* _getNextId(): Int_
+    *
+#### Associations
+* _snippetManager < Main_
+    *  
+* _snippetManager > Editor_
+    *
+* _snippetManager > Snippet_
+    *
 
+### class: JsonIO
+#### Attributes
+* _snippetManager: snippetManager_
+    * contains the snippetManager object
+* _isOpen: boolean_
+    * Keeps track of the current state of the application.
+* _keyBoard: Scanner_
+    * Contains a scanner object for reading user input.
+#### Operations
+* _CliUI()_
+    * Constructor function
+* _uiLoop(): void_
+    *
+* _displaymenu(): void_
+    *
+* _getAndExecuteCommand(): void_
+    *
+* _createSnippet(): void_
+    *
+* _deleteSnippet(): void_
+    *
+* _editSnippet(): void_
+    *
+#### Associations
+* _CliUI < Main_
+    *  
 For each class (and data type) in the class diagram you have to provide a paragraph providing the following information:
 - Brief description about what it represents
 - Brief description of the meaning of each attribute
