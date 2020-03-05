@@ -268,11 +268,13 @@ In this chapter you will describe the following aspects of your project:
 - the 30-seconds video showing the execution of your system (you can embed the video directly in your md file on GitHub).
 
 ### Strategy
-To make sure our implementation is consistent with the presented uml diagrams, we iteratively implemented the features, classes and quality requirements.
+To make sure our implementation is consistent with the presented uml diagrams, we iteratively implemented the features, classes and quality requirements. By using the agile development method our team could track open tasks through the scrumboard available on the github platform.
 
 ### Key Solution
+To keep us from reinventing the wheel, our implementation tries to use as many external libraries as possible. For example, our dynamic text highlighting feature is implemented using an external syntaxhighlighting library.
 
 ### location of the main Java class
+_src/main/java/Main.java_
 
 ### Location of the Jar file
 
