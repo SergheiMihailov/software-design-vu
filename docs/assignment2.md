@@ -37,7 +37,7 @@ This chapter contains the specification of the UML class diagram of your system,
 ### class: Snippet
 This class represents the snippet objects, and thus contains the meta data and original data from the snippet.
 #### Attributes
-* _id_
+* _pathToJson_
     * this attribute makes the snippet unique, there for the content of the snippet can be retrieved separately. 
 * _title_
     * the title attribute gives a quick summary of the contents of the snippet, this improves the usability and retrievability of the snippet.
@@ -52,24 +52,63 @@ This class represents the snippet objects, and thus contains the meta data and o
 * _modified_
     * This attribute will be update with the current time/date when the snippet is modified. 
 #### Operations
-* _UpdateDB()_
-    * _description_
-* _setTitle()_
-* _setLanguage()_
-* _setTags()_
-* _editContent()_
+* _Snippet(in pathToJson:String, in title :String, in content :String, in language :String, in tags :String[*])_
+    * this is the constructor method of the snippet class
+* _writeSnippetToJson(): void_
+    * converts the snippet object into json format
+* _onModification(): void_
+    * updated the modification date field of the modified snippet
+* _getTitle(): String_   
+    * Returns the title of the current snippet.
+* _setTitle(in title:String): void_
+    * Set the title of the current snippet.
+* _getContent(): String_
+    * returns the content field of the current snippet object.
+* _setContent(in content:String): void_
+    * sets the content field of the current snippet object.
+* _getLanguage(): String_
+    * returns the language field
+* _setLanguage(in language:String): void_
+    *
+* _getTags(): String_
+    *
+* _setTags(in tags:String[*]): void_
+    *
+* _getCreated(): Date_
+    *
+* _getModified(): Date_
+    *
+* _toString(): String_
+    * Combines all the field of the snippet object into a readable String.
 #### Associations
-* _Snippet <-> SnippetDB_
-    * _description_
-* _Snippet <(+editedBy)> Editor_
+* _Snippet <-> JsonIO_
+    * description
+* _Snippet < snippetManager_
+    *
 ### class: Editor
 #### Attributes
-* id
-    * _description_
+* _frame: JFrame_
+    * description
+* _textArea: RSyntaxTextArea_
+    *
+* _saveButton: JMenuItem_
+    *
+* _quitButton: JMenuItem_
+    *
+* _menu: JMenu_
+    *
+* _menuBar: JMenuBar_
+    *
 #### Operations
-* UpdateDB()
-    * _description_
+* _savebutton.actionListener()_
+    * This method Listens for clicks on the savebutton and triggers the required actions onclick.
+* _quitButton.actionListener()_
+    *
+* _getFullEditorContent(): String_
+    * This operation returns all the content in the textarea field currently in the editor.
 #### Associations
+* _Editor < snippetManager_
+    *
 
 ### class: CLI User Interface
 #### Attributes
