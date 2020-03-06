@@ -28,6 +28,7 @@ Author(s): Yael Goede
 
 ### class: Snippet
 This class represents the snippet objects, and thus contains the meta data and original data from the snippet.
+
 #### Attributes
 * _pathToJson_
     * this attribute makes the snippet unique, there for the content of the snippet can be retrieved separately. 
