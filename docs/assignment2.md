@@ -228,8 +228,25 @@ In the diagram above a snapshot of the system is shown where the database class 
 The content field contains the actual code used as snippet by the user. The language field specifies the programming language which is valid for the content field. This field enables features such as the text highlighting feature, which is language specific.
 
 Maximum number of words for this section: 500
-
+	
 ## State machine diagrams									
+Author(s): `Björn Keyser`
+
+This chapter contains the specification of at least 2 UML state machines of your system, together with a textual description of all their elements. Also, remember that classes the describe only data structures (e.g., Coordinate, Position) do not need to have an associated state machine since they can be seen as simple "data containers" without behaviour (they have only stateless objects).
+
+### Class CLiUI
+`Figure representing the UML state machine diagram for the CLiUI class`
+![snapshot Diagram](state machine diagram.jpeg)
+
+`Textual description`
+#### States
+- Initial State: Here we display the menu and wait for the user input. In event of valid user input, one of the 6 functionalities is executed.
+- View all snippets: Lists all snippets and their attributes (title, content, tags, language, metadata)
+- Prompt for details [for creation of snippet]: In event of choosing to create a snippet, the user is prompted for a title, the language and tags. A snippet is then created and a editor is opened with no content. 
+- Editor mode: The editor loads content if the editor opened a existing snippet, and a blank page otherwise. On exit, the user is prompted to either save the file or not.
+- Prompt for ID: In case of deleting or editing a snippet, the user is prompted for the ID of the snippet to be deleted/edited. If the ID is valid the snippet is deleted/opened in the editor.
+- View found snippets: In event of filtering, the user can specify parameters for filtering on title name, content or tags and the found snippets are displayed.
+- Quit: quit the program								
 Author(s): `name of the team member(s) responsible for this section`
 
 This chapter contains the specification of at least 2 UML state machines of your system, together with a textual description of all their elements. Also, remember that classes the describe only data structures (e.g., Coordinate, Position) do not need to have an associated state machine since they can be seen as simple "data containers" without behaviour (they have only stateless objects).
