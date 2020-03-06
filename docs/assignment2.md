@@ -254,7 +254,7 @@ The goal of your state machine diagrams is both descriptive and prescriptive, so
 Maximum number of words for this section: 2500
 
 ## Sequence diagrams									
-Author(s): `name of the team member(s) responsible for this section`
+Author(s): Milos
 
 This chapter contains the specification of at least 2 UML sequence diagrams of your system, together with a textual description of all its elements. Here you have to focus on specific situations you want to describe. For example, you can describe the interaction of player when performing a key part of the videogame, during a typical execution scenario, in a special case that may happen (e.g., an error situation), when finalizing a fantasy soccer game, etc.
 
@@ -266,6 +266,7 @@ For each sequence diagram you have to provide:
 The goal of your sequence diagrams is both descriptive and prescriptive, so put the needed level of detail here, finding the right trade-off between understandability of the models and their precision.
 
 Maximum number of words for this section: 2500
+
 
 ## Implementation									
 Author(s): `name of the team member(s) responsible for this section`
