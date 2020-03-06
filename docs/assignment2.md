@@ -217,7 +217,7 @@ Author(s): `Björn Keyser`
 - Quit: quit the program	
 							
 ## Sequence diagrams									
-Author(s): `name of the team member(s) responsible for this section`
+Author(s): Milos
 
 This chapter contains the specification of at least 2 UML sequence diagrams of your system, together with a textual description of all its elements. Here you have to focus on specific situations you want to describe. For example, you can describe the interaction of player when performing a key part of the videogame, during a typical execution scenario, in a special case that may happen (e.g., an error situation), when finalizing a fantasy soccer game, etc.
 
@@ -229,8 +229,30 @@ For each sequence diagram you have to provide:
 The goal of your sequence diagrams is both descriptive and prescriptive, so put the needed level of detail here, finding the right trade-off between understandability of the models and their precision.
 
 Maximum number of words for this section: 2500
-
-## Implementation									
+### Sequence diagram for Create snippet
+![Sequence diagram](SSSEQDCreate.png)
+### Description
+When the user choses the edit snippet option from the Command line interface and provided the ID of the snippet he/she wants to eddit, the CliUI class makes a call to the snippet manager to edit the snippet with the corresponding ID. The snippet manager will check if the ID the user provided is valid. If the ID is not valid, an error message will be prompted to the user through the Command line interface. If the ID is valid, the snippet manager will create a new instance of the editor class. When this instance of the editor
+class is constructed, it will grab the content from the snippet the user has selected to edit and display that. Now that the editor is open the user can freely edit the contents of the snippet. When the user has edited his/hers snippet and wishes to close 
+out of the editor presses save, the method setContent is called on the snippet
+object that’s currently being edited. This method is responsible for updating the Json snippet’s content. The argument passed to this method is getFullEditorContent, which returns the current content in the editor. When setContent is called on the snippet object, the snippet calls the method writeToJson, which is part of the JsonIO class. This method updates the Json object so that the changes are actually saved. This JsonIO class is a singleton class that is nice to have, because then the snippet manager doesn’t have to be responsible for saving snippets, but the snippets can “save themselves” by using that helper class, which is good for modularity, and will make changing specific details in the way snippets are saved/stored easier to do because of the fact there are less dependencies between classes.
+### Sequence diagram for Edit snippet
+![Sequence diagram](SSSEQDEdit.png)
+### Description
+The user selects create in the Command line interface. After selecting create, the user is prompted 
+with 3 reply messages asking for the title, language and tags for the snippet the user wants to create. 
+After the user provides this information, the Command line interface calls create() to the snippet 
+manager, which will fist call a method called getNextId, which will return the next available
+ID the snippet can have. After it has the ID, the snippet manager creates a new instance of a snippet with the ID getNextID returned and the information specified by the user. When a new snippet is constructed, the snippet calls writeSnippetToJson to and a file will be created for that snippet in the Json folder. The snippet objects are stored in a hashmap called snippets. After a new snippet object is created, the snippet manager adds a new entry to the hashmap, containing the ID and created snippet. 
+After this is done, the snippet will open the editor so the user can edit it.
+### Sequence diagram for Filter
+![Sequence diagram](SSEQDFilter.png)
+### Description						
+The user selects the filter option in the Command line interface. 
+The Cli will return a message asking the user to specify filterterms, language, and tags to filter by.
+After the user has provided these arguments to the Cli, the Cli then then calls Filter() with those parameters to the snippet manager. Filter will return a string object that contains snippets. 
+This string is constructed by the listSnippet method. listSnippet will return all snippets in string form, but with the filter method we reduce that to only the snippets that conform to the filter specified by the user. 
+This string will be provided back to the Cli, which then prints that string for the user to see.		
 Author(s): `Serghei`
 
 In this chapter you will describe the following aspects of your project:
