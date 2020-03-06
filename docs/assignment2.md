@@ -229,7 +229,7 @@ The goal of your sequence diagrams is both descriptive and prescriptive, so put 
 
 Maximum number of words for this section: 2500
 ### Sequence diagram for Create snippet
-![Sequence diagram](SSSEQDCreate.png)
+![Sequence diagram](SSSEQDcreate.png)
 ### Description
 When the user choses the edit snippet option from the Command line interface and provided the ID of the snippet he/she wants to eddit, the CliUI class makes a call to the snippet manager to edit the snippet with the corresponding ID. The snippet manager will check if the ID the user provided is valid. If the ID is not valid, an error message will be prompted to the user through the Command line interface. If the ID is valid, the snippet manager will create a new instance of the editor class. When this instance of the editor
 class is constructed, it will grab the content from the snippet the user has selected to edit and display that. Now that the editor is open the user can freely edit the contents of the snippet. When the user has edited his/hers snippet and wishes to close 
@@ -245,11 +245,11 @@ manager, which will fist call a method called getNextId, which will return the n
 ID the snippet can have. After it has the ID, the snippet manager creates a new instance of a snippet with the ID getNextID returned and the information specified by the user. When a new snippet is constructed, the snippet calls writeSnippetToJson to and a file will be created for that snippet in the Json folder. The snippet objects are stored in a hashmap called snippets. After a new snippet object is created, the snippet manager adds a new entry to the hashmap, containing the ID and created snippet. 
 After this is done, the snippet will open the editor so the user can edit it.
 ### Sequence diagram for Filter
-![Sequence diagram](SSEQDFilter.png)
+![Sequence diagram](SSSEQDFilter.png)
 ### Description						
 The user selects the filter option in the Command line interface. 
 The Cli will return a message asking the user to specify filterterms, language, and tags to filter by.
-After the user has provided these arguments to the Cli, the Cli then then calls Filter() with those parameters to the snippet manager. Filter will return a string object that contains snippets. 
+After the user has provided these arguments to the Cli, the Cli then calls Filter() with those parameters to the snippet manager. Filter will return a string object that contains snippets. 
 This string is constructed by the listSnippet method. listSnippet will return all snippets in string form, but with the filter method we reduce that to only the snippets that conform to the filter specified by the user. 
 This string will be provided back to the Cli, which then prints that string for the user to see.		
 Author(s): `Serghei`
