@@ -50,6 +50,6 @@ class Editor {
 
     private void onSave() {
         snippetToEdit.setContent(getFullEditorContent());
-        System.out.println("Edited snippet"+snippetToEdit.getTitle()+"saved");
+        System.out.println("Edited snippet "+snippetToEdit.getTitle()+" saved");
     }
 }

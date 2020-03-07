@@ -1,0 +1,11 @@
+{
+  "pathToJson": "snippo/1",
+  "title": "test",
+  "content": "int highlight \u003d 1;",
+  "language": "java",
+  "tags": [
+    "test"
+  ],
+  "created": "2020-02-07",
+  "modified": "2020-02-07"
+}

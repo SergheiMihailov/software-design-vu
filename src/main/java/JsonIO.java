@@ -10,7 +10,7 @@ class JsonIO {
     private Gson g;
 
     JsonIO () {
-        g = new GsonBuilder().setPrettyPrinting().create();
+        g = new GsonBuilder().setDateFormat("yyyy-mm-dd").setPrettyPrinting().create();
     }
 
     private static final JsonIO INSTANCE = new JsonIO();
