@@ -10,7 +10,7 @@ class JsonIO {
     private Gson g;
 
     JsonIO () {
-        g = new GsonBuilder().setPrettyPrinting().create();
+        g = new GsonBuilder().setDateFormat("yyyy-mm-dd").setPrettyPrinting().create();
     }
 
     private static final JsonIO INSTANCE = new JsonIO();
@@ -28,7 +28,7 @@ class JsonIO {
         }
     }
 
-    Snippet loadFromJson(String pathToJson) {
+    Snippet loadSnippetFromJson(String pathToJson) {
         try {
             return g.fromJson(new FileReader(pathToJson), Snippet.class);
         } catch (FileNotFoundException ex) {

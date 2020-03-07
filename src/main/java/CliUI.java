@@ -30,12 +30,11 @@ class CliUI {
             case 2: createSnippet(); break;
             case 3: deleteSnippet(); break;
             case 4: editSnippet(); break;
-            case 5: System.out.println(snippetManager.filter("test", "", new String[]{})); break;
+            case 5: filterSnippets(); break;
             case 6: isOpen = false; break;
             default: System.out.println(input + ": please select a valid option");
         }
     }
-
 
     private void createSnippet() {
         System.out.println("Enter the title of the snippet:");
@@ -61,5 +60,27 @@ class CliUI {
         System.out.println("Enter the id of the snippet to edit");
         Integer snippetId = keyboard.nextInt();
         snippetManager.edit(snippetId);
+    }
+
+    private void filterSnippets() {
+        System.out.println("Enter the title to filter by (... for none):");
+        String title = keyboard.next();
+        if (title.equals("...")) {
+            title = "";
+        }
+
+        System.out.println("Enter the language of the snippet (... for none):");
+        String lang = keyboard.next();
+        if (lang.equals("...")) {
+            lang = "";
+        }
+
+        System.out.println("Enter the tags of the snippet, like tag1,tag2,...: (... for none)");
+        String[] tags = keyboard.next().split(",");
+        if (tags[0].equals("...")) {
+            tags[0] = "";
+        }
+
+        System.out.println(snippetManager.filter(title, lang, tags));
     }
 }

@@ -31,7 +31,7 @@ Author(s):Serghei Mihailov, Bjorn Keyser, Yael Goede, Milos Delgorge
 | F9 | Snippet metadata | Users shall be able to view snippet metadata such as creation and last modification date, count of times edited or opened. |
 | F10 (optional) | Import/Export snippets | Users shall be able to import and export via a json file to reuse on a different machine using Snippo. |
 | F11 (optional) | Integrated with Github Gist API | Users shall be able to use Snippo in conjunction with Github Gists: [https://developer.github.com/v3/gists/](https://developer.github.com/v3/gists/) |
-| F12 | Basic interactive UI in shell | On launch the program shall display available commands (e.g. edit, create, delete) and execute the chosen ones until closed.  |
+| F12 | Basic interactive GUI in shell | On launch the program shall display available commands (e.g. edit, create, delete) and execute the chosen ones until closed.  |
 
 ## Quality Requirements:
 
@@ -41,7 +41,7 @@ Author(s): Serghei Mihailov, Bjorn Keyser, Yael Goede, Milos Delgorge
 | --- | --- | --- | --- |
 | QR1 | Configurable language highlighting | Extensibility | It shall be easy for the user to add a new code language. |
 | QR2 | Fast search | Responsiveness | Fast search, scalable with the number and size of snippets |
-| QR3 | Intuitive UI | Usability | A new user shall be able to create/read/edit snippets within 5 minutes of using the tool |
+| QR3 | Intuitive GUI | Usability | A new user shall be able to create/read/edit snippets within 5 minutes of using the tool |
 | QR4 | Persistent snippet storage | Reliability | Snippets remain reliably stored in memory until deleted inside the manager or manually deleted from the filesystem |
 | QR5 | Storing unsaved work | Reliability, Usability | In the case of unexpected shutdown of the process, unsaved work shall be stored |
 

@@ -22,6 +22,10 @@ public class Snippet {
         writeSnippetToJson();
     }
 
+    void edit() {
+        new Editor(this);
+    }
+
     private void writeSnippetToJson() {
         JsonIO.getInstance().writeToJson(pathToJson, this);
     }
