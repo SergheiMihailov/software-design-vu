@@ -1,16 +1,10 @@
 # Assignment 2
 
-Maximum number of words for this document: 9000
-
-**IMPORTANT**: In this assignment you will model the whole system. Within each of your models, you will have a *prescriptive intent* when representing the elements related to the feature you are implementing in this assignment, whereas the rest of the elements are used with a *descriptive intent*. In all your diagrams it is strongly suggested to used different colors for the prescriptive and descriptive parts of your models (this helps you in better reasoning on the level of detail needed in each part of the models and the instructors in knowing how to assess your models).   
-
-**Format**: establish formatting conventions when describing your models in this document. For example, you style the name of each class in bold, whereas the attributes, operations, and associations as underlined text, objects are in italic, etc.
-
 ### Implemented feature
 
 | ID  | Short name  | Description  |
 |---|---|---|
-| F12 | Basic interactive GUI in shell | On launch the program shall display available commands (e.g. edit, create, delete) and execute the chosen ones until closed.  |
+| F1| Basic interactive UI in shell | On launch the program shall display available commands (e.g. edit, create, delete) and execute the chosen ones until closed.  |
 | F1.1| API to List All snippets | Users shall be able to list the data of all snippets (ID, title, language, tags) except for content |
 | F1.2 | API to Create snippets | Users shall be able to edit snippets by calling the tool from the CLI using arguments. |
 | F1.3 | API to Read a single snippet | Users shall be able to read full snippet data by calling the tool from the CLI using arguments. |
@@ -18,11 +12,11 @@ Maximum number of words for this document: 9000
 | F1.5 | API to Delete snippets | Users shall be able to delete specific snippets by calling the tool from the CLI using arguments. |
 | F2 | Snippet editor | Users shall be able to edit and save snippets via a basic Vim-like CLI editor with visual/insert/replace modes. |
 | F3 | Tags | Users shall be able to add tags to snippets which will make snippets filterable by tag and finding snippets easier.|
-| F5 | Filter | Users can filter for their snippets by content, tags, description, title, language. Like snippo -f "language:java tags:tag1,tag2 searchterm". |
-| F6 | Configurable syntax highlighting | Users shall have their code for a specific language with highlighting of syntax that is configurable via a file (that they create or that has been provided) that maps keywords to colors. |
-| F9 | Snippet metadata | Users shall be able to view snippet metadata such as creation and last modification date, count of times edited or opened. |
-| F10 (optional) | Import/Export snippets | Users shall be able to import and export via a json file to reuse on a different machine using Snippo. |
-| F12 | Basic interactive GUI in shell | On launch the program shall display available commands (e.g. edit, create, delete) and execute the chosen ones until closed.  |
+| F4 | Filter | Users can filter for their snippets by content, tags, description, title, language. Like snippo -f "language:java tags:tag1,tag2 searchterm". |
+| F5 | Configurable syntax highlighting | Users shall have their code for a specific language with highlighting of syntax that is configurable via a file (that they create or that has been provided) that maps keywords to colors. |
+| F6 | Snippet metadata | Users shall be able to view snippet metadata such as creation and last modification date, count of times edited or opened. |
+| F7 (optional) | Import/Export snippets | Users shall be able to import and export via a json file to reuse on a different machine using Snippo. |
+| F8 | Basic interactive UI in shell | On launch the program shall display available commands (e.g. edit, create, delete) and execute the chosen ones until closed.  |
 
 ### Used modeling tool
 StarUML http://staruml.io/
@@ -30,12 +24,11 @@ StarUML http://staruml.io/
 ## Class diagram									
 Author(s): Yael Goede
 
-This chapter contains the specification of the UML class diagram of your system, together with a textual description of all its elements.
-
-`Figure representing the UML class diagram`
 ![class Diagram](classDiagram.png)
+
 ### class: Snippet
 This class represents the snippet objects, and thus contains the meta data and original data from the snippet.
+
 #### Attributes
 * _pathToJson_
     * this attribute makes the snippet unique, there for the content of the snippet can be retrieved separately. 
@@ -81,17 +74,17 @@ This class represents the snippet objects, and thus contains the meta data and o
 * _toString(): String_
     * Combines all the field of the snippet object into a readable String.
 #### Associations
-* _Snippet <-> JsonIO_
-    * description
+* _Snippet < JsonIO_
+    * This relation specifies the dependency between the snippet class and the JsonIO class. The snippet class uses the JsonIO class to convert string to json and json to string, to store and retrieve snippet objects.
 * _Snippet < snippetManager_
-    *
+    * This snippetManager keeps a list of all the snippets, using the snippet class it constructs valid snippet objects to maintain.
 ### class: Editor
 This class takes care of the editor part, meaning syntax highlighting and editing the snippet content. The editor class is in a directed relation, only with the snippetManager class.
 #### Attributes
 * _frame: JFrame_
-    * description
+    * The window for the editor
 * _textArea: RSyntaxTextArea_
-    *
+    * the highlighting feature with the needed textarea for the user to write in.
 * _saveButton: JMenuItem_
     *
 * _quitButton: JMenuItem_
@@ -109,7 +102,7 @@ This class takes care of the editor part, meaning syntax highlighting and editin
     * This operation returns all the content in the textarea field currently in the editor.
 #### Associations
 * _Editor < snippetManager_
-    *
+    * The snippet manager calls the editor class with a snippet id to edit or create a snippet.
 
 ### class: CliUI
 This class implements the UI, and thus controls the navigation within the menu and further actions with the program by the user.
@@ -137,7 +130,7 @@ This class implements the UI, and thus controls the navigation within the menu a
     *
 #### Associations
 * _CliUI < Main_
-    *   
+    * The Cli class is called from main and handles all the user interactions with the program.
  
 ### class: snippetManager
 This class keeps track of all the snippets and is the only class able to modify the snippets.
@@ -173,11 +166,11 @@ This class keeps track of all the snippets and is the only class able to modify 
     *
 #### Associations
 * _snippetManager < Main_
-    *  
+    *  On the start of the program the main class constructs a snippetmanager class which maintains all the operations on the snippets.
 * _snippetManager > Editor_
-    *
+    * already described.
 * _snippetManager > Snippet_
-    *
+    * described
 
 ### class: JsonIO
 This class takes care of the conversion between string type and Json type using the GSON library from google.
@@ -197,54 +190,34 @@ This class takes care of the conversion between string type and Json type using 
     *
 #### Associations
 * _JsonIO < Main_
-    *  
+    * already described
 * _JsonIO > Snippet_
-    *
+    * already described
     
-For each class (and data type) in the class diagram you have to provide a paragraph providing the following information:
-- Brief description about what it represents
-- Brief description of the meaning of each attribute
-- Brief description of the meaning of each operation
-- Brief description of the meaning of each association involving it (each association can be described only once in this deliverable)
-
-Also, you can briefly discuss fragments of previous versions of the class diagram (with figures) in order to show how you evolved from initial versions of the class diagram to the final one.
-
-In this document you have to adhere to the following formatting conventions:
-- the name of each **class** is in bold
-- the *attributes*, *operations*, *associations*, and *objects* are in italic.
-
-Maximum number of words for this section: 2500
-
 ## Object diagrams								
 Author(s): Yael Goede
 
-This chapter contains the description of a "snapshot" of the status of your system during its execution. 
-This chapter is composed of a UML object diagram of your system, together with a textual description of its key elements.
-
-`Figure representing the UML class diagram`
 ![snapshot Diagram](snapshotDiagram.png)
-`Textual description`
 In the diagram above a snapshot of the system is shown where the database class is filled with 4 snippets. All snippets have a unique id which makes them unique from each other. Further more all fields are filled with the required information, such as the language, tags and content field. 
 The content field contains the actual code used as snippet by the user. The language field specifies the programming language which is valid for the content field. This field enables features such as the text highlighting feature, which is language specific.
 
-Maximum number of words for this section: 500
-
 ## State machine diagrams									
-Author(s): `name of the team member(s) responsible for this section`
+Author(s): `Björn Keyser`
 
-This chapter contains the specification of at least 2 UML state machines of your system, together with a textual description of all their elements. Also, remember that classes the describe only data structures (e.g., Coordinate, Position) do not need to have an associated state machine since they can be seen as simple "data containers" without behaviour (they have only stateless objects).
+### Class CLiUI
+![snapshot Diagram](cli_stateDiagram.jpeg)
 
-For each state machine you have to provide:
-- the name of the class for which you are representing the internal behavior;
-- a figure representing the part of state machine;
-- a textual description of all its states, transitions, activities, etc. in a narrative manner (you do not need to structure your description into tables in this case). We expect 3-4 lines of text for describing trivial or very simple state machines (e.g., those with one to three states), whereas you will provide longer descriptions (e.g., ~500 words) when describing more complex state machines.
-
-The goal of your state machine diagrams is both descriptive and prescriptive, so put the needed level of detail here, finding the right trade-off between understandability of the models and their precision.
-
-Maximum number of words for this section: 2500
-
+#### States
+- Initial State: Here we display the menu and wait for the user input. In event of valid user input, one of the 6 functionalities is executed.
+- View all snippets: Lists all snippets and their attributes (title, content, tags, language, metadata)
+- Prompt for details [for creation of snippet]: In event of choosing to create a snippet, the user is prompted for a title, the language and tags. A snippet is then created and a editor is opened with no content. 
+- Editor mode: The editor loads content if the editor opened a existing snippet, and a blank page otherwise. On exit, the user is prompted to either save the file or not.
+- Prompt for ID: In case of deleting or editing a snippet, the user is prompted for the ID of the snippet to be deleted/edited. If the ID is valid the snippet is deleted/opened in the editor.
+- View found snippets: In event of filtering, the user can specify parameters for filtering on title name, content or tags and the found snippets are displayed.
+- Quit: quit the program	
+							
 ## Sequence diagrams									
-Author(s): `name of the team member(s) responsible for this section`
+Author(s): Milos
 
 This chapter contains the specification of at least 2 UML sequence diagrams of your system, together with a textual description of all its elements. Here you have to focus on specific situations you want to describe. For example, you can describe the interaction of player when performing a key part of the videogame, during a typical execution scenario, in a special case that may happen (e.g., an error situation), when finalizing a fantasy soccer game, etc.
 
@@ -256,9 +229,31 @@ For each sequence diagram you have to provide:
 The goal of your sequence diagrams is both descriptive and prescriptive, so put the needed level of detail here, finding the right trade-off between understandability of the models and their precision.
 
 Maximum number of words for this section: 2500
-
-## Implementation									
-Author(s): `name of the team member(s) responsible for this section`
+### Sequence diagram for Create snippet
+![Sequence diagram](SSSEQDCreate.png)
+### Description
+When the user choses the edit snippet option from the Command line interface and provided the ID of the snippet he/she wants to eddit, the CliUI class makes a call to the snippet manager to edit the snippet with the corresponding ID. The snippet manager will check if the ID the user provided is valid. If the ID is not valid, an error message will be prompted to the user through the Command line interface. If the ID is valid, the snippet manager will create a new instance of the editor class. When this instance of the editor
+class is constructed, it will grab the content from the snippet the user has selected to edit and display that. Now that the editor is open the user can freely edit the contents of the snippet. When the user has edited his/hers snippet and wishes to close 
+out of the editor presses save, the method setContent is called on the snippet
+object that’s currently being edited. This method is responsible for updating the Json snippet’s content. The argument passed to this method is getFullEditorContent, which returns the current content in the editor. When setContent is called on the snippet object, the snippet calls the method writeToJson, which is part of the JsonIO class. This method updates the Json object so that the changes are actually saved. This JsonIO class is a singleton class that is nice to have, because then the snippet manager doesn’t have to be responsible for saving snippets, but the snippets can “save themselves” by using that helper class, which is good for modularity, and will make changing specific details in the way snippets are saved/stored easier to do because of the fact there are less dependencies between classes.
+### Sequence diagram for Edit snippet
+![Sequence diagram](SSSEQDEdit.png)
+### Description
+The user selects create in the Command line interface. After selecting create, the user is prompted 
+with 3 reply messages asking for the title, language and tags for the snippet the user wants to create. 
+After the user provides this information, the Command line interface calls create() to the snippet 
+manager, which will fist call a method called getNextId, which will return the next available
+ID the snippet can have. After it has the ID, the snippet manager creates a new instance of a snippet with the ID getNextID returned and the information specified by the user. When a new snippet is constructed, the snippet calls writeSnippetToJson to and a file will be created for that snippet in the Json folder. The snippet objects are stored in a hashmap called snippets. After a new snippet object is created, the snippet manager adds a new entry to the hashmap, containing the ID and created snippet. 
+After this is done, the snippet will open the editor so the user can edit it.
+### Sequence diagram for Filter
+![Sequence diagram](SSEQDFilter.png)
+### Description						
+The user selects the filter option in the Command line interface. 
+The Cli will return a message asking the user to specify filterterms, language, and tags to filter by.
+After the user has provided these arguments to the Cli, the Cli then then calls Filter() with those parameters to the snippet manager. Filter will return a string object that contains snippets. 
+This string is constructed by the listSnippet method. listSnippet will return all snippets in string form, but with the filter method we reduce that to only the snippets that conform to the filter specified by the user. 
+This string will be provided back to the Cli, which then prints that string for the user to see.		
+Author(s): `Serghei`
 
 In this chapter you will describe the following aspects of your project:
 - the strategy that you followed when moving from the UML models to the implementation code;
