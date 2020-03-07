@@ -236,7 +236,8 @@ The user selects create in the Command line interface. After selecting create, t
 with 3 reply messages asking for the title, language and tags for the snippet the user wants to create. 
 After the user provides this information, the Command line interface calls create() to the snippet 
 manager, which will fist call a method called getNextId, which will return the next available
-ID the snippet can have. After it has the ID, the snippet manager creates a new instance of a snippet with that ID and the information specified by the user. When a new snippet is constructed, the snippet calls writeSnippetToJson to and a file will be created for that snippet in the Json folder. 
+ID the snippet can have. After it has the ID, the snippet manager creates a new instance of a snippet with that ID and the information specified by the user. When a new snippet is constructed, a new file is made and the snippet calls writeSnippetToJson, which is part of the JsonIO class. 
+This will write the relevant data for the snippet to the file.
 The snippet objects are stored in a hashmap called snippets. 
 After a new snippet object is created, the snippet manager adds a new entry to the hashmap, 
 containing the ID and created snippet. 
