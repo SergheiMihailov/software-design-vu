@@ -28,7 +28,7 @@ class JsonIO {
         }
     }
 
-    Snippet loadFromJson(String pathToJson) {
+    Snippet loadSnippetFromJson(String pathToJson) {
         try {
             return g.fromJson(new FileReader(pathToJson), Snippet.class);
         } catch (FileNotFoundException ex) {

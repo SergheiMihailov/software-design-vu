@@ -8,31 +8,31 @@ class SnippetManager {
 
     SnippetManager(String pathToSnippoDir) {
         this.pathToSnippoDir = pathToSnippoDir;
+
+        loadSnippets() ;
+    }
+
+    private void loadSnippets() {
         // Make sure the Snippo folder is present
         File snippoFolder = new File(pathToSnippoDir);
         if (snippoFolder.mkdir()) {
             System.out.println("Folder created: " + snippoFolder.getName());
         }
 
-        loadSnippets(snippoFolder) ;
-    }
-
-    private void loadSnippets(File folder) {
-        for (final File fileEntry : Objects.requireNonNull(folder.listFiles())) {
+        for (final File fileEntry : Objects.requireNonNull(snippoFolder.listFiles())) {
             if (!fileEntry.isDirectory()) {
                 Integer snippetId = Integer.parseInt(fileEntry.getName());
-                Snippet loadedSnippet = JsonIO.getInstance().loadFromJson(getPathToSnippetJson(snippetId));
+                Snippet loadedSnippet = JsonIO.getInstance().loadSnippetFromJson(generatePathToSnippetJson(snippetId));
                 snippets.put(snippetId, loadedSnippet);
             }
         }
     }
 
-    private String getPathToSnippetJson(Integer snippetId) {
+    private String generatePathToSnippetJson(Integer snippetId) {
         return pathToSnippoDir + "/" + snippetId;
     }
 
-
-    private String listSnippets(Map<Integer, Snippet> snippetsToList) {
+    String listSnippets(Map<Integer, Snippet> snippetsToList) {
         StringBuilder response = new StringBuilder("All snippetsToList: \n");
 
         for (Integer snippetId: snippetsToList.keySet()) {
@@ -50,27 +50,36 @@ class SnippetManager {
         Integer newSnippetId = getNextId();
         snippets.put(
                 newSnippetId,
-                new Snippet(getPathToSnippetJson(newSnippetId), title, content, language, tags)
+                new Snippet(generatePathToSnippetJson(newSnippetId), title, content, language, tags)
         );
 
         return newSnippetId;
     }
 
     String read(Integer id) {
-        if (snippets.containsKey(id)) {
+        if (isValidId(id)) {
             return snippets.get(id).toString();
         } else {
-            return "Snippet not found.";
+            onSnippetNotFound();
+            return "";
         }
     }
 
     void delete(Integer id) {
-        snippets.remove(id);
+        if (isValidId(id)) {
+            snippets.remove(id);
+        } else {
+            onSnippetNotFound();
+        }
     }
 
     void edit(Integer id) {
-        Snippet snippetToEdit = snippets.get(id);
-        new Editor(snippetToEdit);
+        if (isValidId(id)) {
+            Snippet snippetToEdit = snippets.get(id);
+            snippetToEdit.edit();
+        } else {
+            onSnippetNotFound();
+        }
     }
 
     String filter(String wordToContain, String language, String[] tags) {
@@ -89,21 +98,21 @@ class SnippetManager {
         );
     }
 
-     String search(String searchTerm){
-         return listSnippets(
-                 snippets.entrySet()
-                         .stream()
-                         .filter(
-                                 entry -> entry.getValue().getTitle().contains(searchTerm) ||
-                                         entry.getValue().getContent().contains(searchTerm)
-                         )
-                         .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
-         );
-    }
-
     // Returns the next available Id for a new snippet
     private int getNextId() {
         return snippets.isEmpty() ?
                 1 : Collections.max(snippets.keySet())+1;
+    }
+
+    private boolean isValidId(Integer id) {
+        return snippets.containsKey(id);
+    }
+
+    private void onSnippetNotFound() {
+        System.out.println("Snippet not found");
+    }
+
+    HashMap<Integer, Snippet> getSnippets() {
+        return snippets;
     }
 }

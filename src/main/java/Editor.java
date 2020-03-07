@@ -1,22 +1,30 @@
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
-import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 
 class Editor {
-    private JFrame frame;
     private RSyntaxTextArea textArea;
+    private Snippet snippetToEdit;
 
     Editor(Snippet snippet) {
-        frame = new JFrame("Snippo: Editing " + snippet.getTitle());
-        textArea = new RSyntaxTextArea(snippet.getContent());
+        snippetToEdit = snippet;
+
+        textArea = new RSyntaxTextArea(snippetToEdit.getContent());
+        textArea.setSyntaxEditingStyle("text/"+snippetToEdit.getLanguage().toLowerCase());
+
+        JFrame frame = new JFrame("Snippo: Editing " + snippetToEdit.getTitle());
+
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Snippet");
-        menu.setMnemonic('s');
         JMenuItem saveButton = new JMenuItem("Save");
-        saveButton.setMnemonic('s');
         JMenuItem quitButton = new JMenuItem("Quit");
+
+        saveButton.addActionListener(e -> onSave());
+        quitButton.addActionListener(e -> frame.dispose());
+
+        menu.setMnemonic('s');
+        saveButton.setMnemonic('s');
         quitButton.setMnemonic('q');
 
         menu.add(saveButton);
@@ -27,16 +35,7 @@ class Editor {
 
         frame.setSize(500, 500);
         frame.setVisible(true);
-        frame.requestFocus();
 
-        saveButton.addActionListener(e -> {
-            snippet.setContent(getFullEditorContent());
-            System.out.println("saved");
-        });
-
-        quitButton.addActionListener(e -> frame.dispose());
-
-        textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVA);
     }
 
     private String getFullEditorContent() {
@@ -47,5 +46,10 @@ class Editor {
             ex.printStackTrace();
             return "";
         }
+    }
+
+    private void onSave() {
+        snippetToEdit.setContent(getFullEditorContent());
+        System.out.println("Edited snippet"+snippetToEdit.getTitle()+"saved");
     }
 }
