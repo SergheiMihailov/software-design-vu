@@ -40,8 +40,9 @@ Author(s): Serghei Mihailov, Bjorn Keyser, Yael Goede, Milos Delgorge
 | **ID** | **Short name** | **Quality attribute** | **Description** |
 | --- | --- | --- | --- |
 | QR1 | Configurable language highlighting | Extensibility | It shall be easy for the user to add a new code language. |
-| QR2 | Fast search | Responsiveness | Fast search, scalable with the number and size of snippets |
-| QR3 | Intuitive GUI | Usability | A new user shall be able to create/read/edit snippets within 5 minutes of using the tool |
+| QR2.1 | Fast search | Responsiveness | Fast search with latency p99.9(10 snippets) = 10ms and p99.9(1000 snippets) = 150ms |
+| QR2.2 | Fast filtering | Responsiveness | Fast filtering with latency p99.9(10 snippets) = 10ms and p99.9(1000 snippets) = 150ms |
+| QR3 | Intuitive GUI | Responsiveness, usability | A new user shall be able to create/read/edit snippets within 5 minutes of using the tool |
 | QR4 | Persistent snippet storage | Reliability | Snippets remain reliably stored in memory until deleted inside the manager or manually deleted from the filesystem |
 | QR5 | Storing unsaved work | Reliability, Usability | In the case of unexpected shutdown of the process, unsaved work shall be stored |
 

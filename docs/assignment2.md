@@ -1,4 +1,13 @@
 # Assignment 2
+#### Response to assignment 1 feedback: 
+* We decided that as it is a locally used tool for non-sensitive data (at least for now), security is not a requirement.
+* Replaced "should" with "shall".
+* Help will be an interactive feature, not just readme.
+* Feature of viewing snippets: fulfilled by the editor view.
+* CRUD functions split into 4 separate features, as suggested.
+* Authentication feature comment: we decided not to specify the implementation details in a feature description
+* We made search and filter two separate features, as suggested. The first ranks, the second matches.
+* Intuitive UI indeed belongs to the responsiveness category.
 
 ### Implemented feature
 
