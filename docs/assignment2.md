@@ -238,7 +238,10 @@ Author(s): `Björn Keyser`
 - Editor mode: The editor loads content if the editor opened a existing snippet, and a blank page otherwise. On exit, the user is prompted to either save the file or not.
 - Prompt for ID: In case of deleting or editing a snippet, the user is prompted for the ID of the snippet to be deleted/edited. If the ID is valid the snippet is deleted/opened in the editor.
 - View found snippets: In event of filtering, the user can specify parameters for filtering on title name, content or tags and the found snippets are displayed.
-- Quit: quit the program	
+- Quit: quit the program
+
+#### Second state machine diagram
+We believe that one state machine covers the entire state space of our application and a second one is not necessary for either descriptive or prescriptive purposes (we tried hard to come up with another state machine diagram idea).	
 							
 ## Sequence diagrams									
 Author(s): Milos
