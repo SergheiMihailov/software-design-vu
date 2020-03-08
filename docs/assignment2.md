@@ -15,16 +15,16 @@
 | F4 | Filter | Users can filter for their snippets by content, tags, description, title, language. Like snippo -f "language:java tags:tag1,tag2 searchterm". |
 | F5 | Configurable syntax highlighting | Users shall have their code for a specific language with highlighting of syntax that is configurable via a file (that they create or that has been provided) that maps keywords to colors. |
 | F6 | Snippet metadata | Users shall be able to view snippet metadata such as creation and last modification date, count of times edited or opened. |
-| F7 (optional) | Import/Export snippets | Users shall be able to import and export via a json file to reuse on a different machine using Snippo. |
+| F7 (optional) | Import/Export snippets | Users shall be able to import and export snippets via a json file to reuse on a different machine using Snippo. |
 | F8 | Basic interactive UI in shell | On launch the program shall display available commands (e.g. edit, create, delete) and execute the chosen ones until closed.  |
 
 ### Used modeling tool
 StarUML http://staruml.io/
 
 ## Class diagram									
-Author(s): Yael Goede
+Author(s): Yael Goede, Serghei Mihailov
 
-![class Diagram](classDiagram.png)
+![Class Diagram](ClassDiagramSerghei.svg)
 
 ### class: Snippet
 This class represents the snippet objects, and thus contains the meta data and original data from the snippet.
@@ -51,6 +51,8 @@ This class represents the snippet objects, and thus contains the meta data and o
     * converts the snippet object into json format
 * _onModification(): void_
     * updated the modification date field of the modified snippet
+* _edit(): void_
+    * opens an editor of the snippet that allows to modify its content.
 * _getTitle(): String_   
     * Returns the title of the current snippet.
 * _setTitle(in title:String): void_
@@ -74,51 +76,42 @@ This class represents the snippet objects, and thus contains the meta data and o
 * _toString(): String_
     * Combines all the field of the snippet object into a readable String.
 #### Associations
-* _Snippet < JsonIO_
-    * This relation specifies the dependency between the snippet class and the JsonIO class. The snippet class uses the JsonIO class to convert string to json and json to string, to store and retrieve snippet objects.
-* _Snippet < snippetManager_
-    * This snippetManager keeps a list of all the snippets, using the snippet class it constructs valid snippet objects to maintain.
+* _Snippet > JsonIO_
+    * described
+* _Snippet - Editor_
+    * The snippet instantiates the editor to edit its contents.
 ### class: Editor
 This class takes care of the editor part, meaning syntax highlighting and editing the snippet content. The editor class is in a directed relation, only with the snippetManager class.
 #### Attributes
-* _frame: JFrame_
-    * The window for the editor
 * _textArea: RSyntaxTextArea_
-    * the highlighting feature with the needed textarea for the user to write in.
-* _saveButton: JMenuItem_
-    *
-* _quitButton: JMenuItem_
-    *
-* _menu: JMenu_
-    *
-* _menuBar: JMenuBar_
-    *
+    * the input text field that stores users modifications to the content of the snippet and provides syntax highlighting.
+* _snippetToEdit: Snippet_
+    * the snippet edited.
 #### Operations
-* _savebutton.actionListener()_
-    * This method Listens for clicks on the savebutton and triggers the required actions onclick.
-* _quitButton.actionListener()_
-    *
+* _Editor(snippet:Snippet): void_
+    * 
+* _onSave(): void_
+    * on a save event (e.g. user presses the Save menu item) this sets the content of the edited snippet to the content of the text area.
 * _getFullEditorContent(): String_
     * This operation returns all the content in the textarea field currently in the editor.
 #### Associations
-* _Editor < snippetManager_
-    * The snippet manager calls the editor class with a snippet id to edit or create a snippet.
-
+* _Snippet - Editor_
+    * described in Snippet.
 ### class: CliUI
 This class implements the UI, and thus controls the navigation within the menu and further actions with the program by the user.
 #### Attributes
 * _snippetManager: snippetManager_
-    * contains the snippetManager object
+    * contains the snippetManager object that the user interacts with. 
 * _isOpen: boolean_
     * Keeps track of the current state of the application.
 * _keyBoard: Scanner_
     * Contains a scanner object for reading user input.
 #### Operations
-* _CliUI()_
+* _CliUI(in snippetManager:SnippetManager): CliUI_
     * Constructor function
 * _uiLoop(): void_
     *
-* _displaymenu(): void_
+* _displayMenu(): void_
     *
 * _getAndExecuteCommand(): void_
     *
@@ -128,10 +121,19 @@ This class implements the UI, and thus controls the navigation within the menu a
     *
 * _editSnippet(): void_
     *
+* _filterSnippets(): void_
+    *
+* _quit(): void_
+    *
+* _runCommandsOnArgs(in args:String): void_
+    *
+    
 #### Associations
 * _CliUI < Main_
     * The Cli class is called from main and handles all the user interactions with the program.
- 
+* _CliUI > SnippetManager_
+    * The Cli is initialized using a specific snippet manager as backend. 0..* Clis can use 1 snippet manager, but only one snippet manager per Cli.
+
 ### class: snippetManager
 This class keeps track of all the snippets and is the only class able to modify the snippets.
 #### Attributes
@@ -140,59 +142,81 @@ This class keeps track of all the snippets and is the only class able to modify 
 * _snippets: HashMap<Integer, Snippet>_
     * Keeps track of all snippets currently in the manager.
 #### Operations
-* _snippetManager(in pathToSnippoDir:String)_
+* _SnippetManager(pathToSnippoDir:String): void_
     * Constructor function
-* _loadSnippets(in folder:File): void_
+* _loadSnippets(folder:File): void_
     *
-* _getPathToSnippetJson(in snippetId :Integer): String_
-    *
-* _listSnippets(in snippetsToList:Map): String_
+* _listSnippets(snippetsToList:Map): String_
     *
 * _listAll(): String_
     *
-* _create(in title:String, in content:String, in language:String, in tags :String[*]): Integer_
+* _create(title:String, content:String, language:String, tags :String[*]): Integer_
     *
-* _read(in id:Integer): String_
+* _read(id:Integer): String_
     *
-* _delete(in id:Integer): void_
+* _delete(id:Integer): void_
     *
-* _edit(in id:Integer): void_
+* _edit(id:Integer): void_
     *
-* _filter(in wordToContain:String, in language:String, in tags:String[*]): String_
+* _filter(wordToContain:String, tags:String[*], language:String): HashMap<Integer, Snippet>_
     * 
-* _search(in searchTerm:String): String_
-    *
 * _getNextId(): Int_
     *
+* _isValidId(id:Integer): Boolean_
+    *
+* _generatePathToSnippetJson(snippetId:Integer): String_
+    *
+* _getSnippets(): HashMap<Integer; Snippet>_
+    *
 #### Associations
-* _snippetManager < Main_
+* _SnippetManager < Main_
     *  On the start of the program the main class constructs a snippetmanager class which maintains all the operations on the snippets.
-* _snippetManager > Editor_
-    * already described.
-* _snippetManager > Snippet_
+* _SnippetManager > Snippet_
     * described
-
+* _SnippetManager > JsonIO_
+    * described
+    
 ### class: JsonIO
-This class takes care of the conversion between string type and Json type using the GSON library from google.
+This class takes care of the conversion between string type and Json type using the GSON library.
 #### Attributes
 * _g: Gson_
     * contains the Gson object
 #### Operations
+* _JsonIO(): void_
+    *
 * _getInstance(): JsonIO_
     * Constructor function
-* _writeToJson(in pathToJson:String, in object :Object): void_
+* _writeToJson(pathToJson:String, object :Object): void_
     *
-* _loadFromJson(in pathToJson:String): Snippet_
+* _loadFromJson(pathToJson:String): Snippet_
     *
-* _onException(in e:Exception): void_
-    *
-* _JsonIO()_
+* _onException(e:Exception): void_
     *
 #### Associations
 * _JsonIO < Main_
     * already described
-* _JsonIO > Snippet_
-    * already described
+* _JsonIO < Snippet_
+    * The snippet class uses the JsonIO class to convert snippet objects to json, to store snippet objects.
+* _JsonIO < SnippetManager_
+    * The snippet manager class uses the JsonIO class to convert json to objects, to retrieve snippet objects.
+
+### class: Main
+ 
+#### Attributes
+* _snippetManager: SnippetManager_
+    * 
+* _cliUI: CliUI_
+    * 
+#### Operations
+* _main(args:String[*]): void_
+    *
+#### Associations
+* _Main > JsonIO_
+    * 
+* _Main > SnippetManager_
+    * 
+* _Main > CliUI_
+    * 
     
 ## Object diagrams								
 Author(s): Yael Goede
@@ -259,6 +283,8 @@ The Cli will return a message asking the user to specify filterterms, language, 
 After the user has provided these arguments to the Cli, the Cli then calls Filter() with those parameters to the snippet manager. Filter will return a string object that contains snippets. 
 This string is constructed by the listSnippet method. listSnippet will return all snippets in string form, but with the filter method we reduce that to only the snippets that conform to the filter specified by the user. 
 This string will be provided back to the Cli, which then prints that string for the user to see.		
+
+# Implementation
 Author(s): `Serghei`
 
 In this chapter you will describe the following aspects of your project:

@@ -67,7 +67,11 @@ class SnippetManager {
 
     void delete(Integer id) {
         if (isValidId(id)) {
-            snippets.remove(id);
+            if (new File(generatePathToSnippetJson(id)).delete()) {
+                snippets.remove(id);
+            } else {
+                System.out.println("Cannot delete the snippet and its file. Id: " + id);
+            }
         } else {
             onSnippetNotFound();
         }
@@ -82,9 +86,8 @@ class SnippetManager {
         }
     }
 
-    String filter(String wordToContain, String language, String[] tags) {
-        return listSnippets(
-                snippets.entrySet()
+    Map<Integer, Snippet> filter(String wordToContain, String language, String[] tags) {
+        return snippets.entrySet()
                 .stream()
                 .filter(
                         entry -> entry.getValue().getTitle().contains(wordToContain) ||
@@ -94,8 +97,7 @@ class SnippetManager {
                         entry.getValue().getLanguage().equals(language))
                 .filter(entry -> (tags.length == 1 && tags[0].equals("")) ||
                         Arrays.asList(entry.getValue().getTags()).containsAll(Arrays.asList(tags)))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue))
-        );
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
     // Returns the next available Id for a new snippet
