@@ -22,7 +22,7 @@
 StarUML http://staruml.io/
 
 ## Class diagram									
-Author(s): Yael Goede, Serghei Mihailov
+Author(s): `Yael Goede`, `Serghei Mihailov`
 
 ![Class Diagram](ClassDiagramSerghei.svg)
 
@@ -64,15 +64,15 @@ This class represents the snippet objects, and thus contains the meta data and o
 * _getLanguage(): String_
     * returns the language field
 * _setLanguage(in language:String): void_
-    *
-* _getTags(): String_
-    *
+    * just sets the language attribute to a value
+* _getTags(): String[*]_
+    * returns the tag String array
 * _setTags(in tags:String[*]): void_
-    *
+    * just sets the tags attribute to a value
 * _getCreated(): Date_
-    *
+    * returns creation date
 * _getModified(): Date_
-    *
+    * returns last modification date
 * _toString(): String_
     * Combines all the field of the snippet object into a readable String.
 #### Associations
@@ -89,7 +89,7 @@ This class takes care of the editor part, meaning syntax highlighting and editin
     * the snippet edited.
 #### Operations
 * _Editor(snippet:Snippet): void_
-    * 
+    * Initializes all the UI elements (frame, menu, textarea, listeners) and launches the editor window.
 * _onSave(): void_
     * on a save event (e.g. user presses the Save menu item) this sets the content of the edited snippet to the content of the text area.
 * _getFullEditorContent(): String_
@@ -110,23 +110,23 @@ This class implements the UI, and thus controls the navigation within the menu a
 * _CliUI(in snippetManager:SnippetManager): CliUI_
     * Constructor function
 * _uiLoop(): void_
-    *
+    * Will display the menu and execute entered commands until the user quits.
 * _displayMenu(): void_
-    *
+    * Simply displays hardcoded menu options.
 * _getAndExecuteCommand(): void_
-    *
+    * Reads keyboard input and executes the corresponding command (as per the menu). 
 * _createSnippet(): void_
-    *
+    * the method makes all the necessary client-side operations to create a snippet, like prompting for input and making calls to backend.
 * _deleteSnippet(): void_
-    *
+    * same as create but delete.
 * _editSnippet(): void_
-    *
+    * same as create but edit.
 * _filterSnippets(): void_
-    *
+    * same as create but filter. Also prints the output of the snippets that match the filter.
 * _quit(): void_
-    *
+    * stops the ui loop by setting the loop variable `isOpen` to `false`.
 * _runCommandsOnArgs(in args:String): void_
-    *
+    * this parses the command line arguments if there are any and executes the respective command, displaying the output, then the app finishes.
     
 #### Associations
 * _CliUI < Main_
@@ -145,29 +145,29 @@ This class keeps track of all the snippets and is the only class able to modify 
 * _SnippetManager(pathToSnippoDir:String): void_
     * Constructor function
 * _loadSnippets(folder:File): void_
-    *
-* _listSnippets(snippetsToList:Map): String_
-    *
+    * uses JsonIO to read all snippets in the `pathToSnippoDir` folder.
+* _listSnippets(snippetsToList:Map<Integer, Snippet>): String_
+    * given an integer-snippet map, prints the list of snippets.
 * _listAll(): String_
-    *
+    * same as listSnippets but for all snippets managed.
 * _create(title:String, content:String, language:String, tags :String[*]): Integer_
-    *
-* _read(id:Integer): String_
-    *
+    * creates a snippet object with the given arguments.
+* _read(id:Integer): Snippet_
+    * returns the snippet with the provided id.
 * _delete(id:Integer): void_
-    *
+    * deletes the snippet with the provided id.
 * _edit(id:Integer): void_
-    *
+    * calls the snippets edit method.
 * _filter(wordToContain:String, tags:String[*], language:String): HashMap<Integer, Snippet>_
-    * 
+    * filters the snippets managed and returns an integer-snippet map.
 * _getNextId(): Int_
-    *
+    * gets the next available id for a new snippet.
 * _isValidId(id:Integer): Boolean_
-    *
+    * checks if an integer is a valid id for an existing snippet.
 * _generatePathToSnippetJson(snippetId:Integer): String_
-    *
+    * returns the relative path for the requested snippet (by id).
 * _getSnippets(): HashMap<Integer; Snippet>_
-    *
+    * returns all the managed snippets as an integer-snippet hashmap.
 #### Associations
 * _SnippetManager < Main_
     *  On the start of the program the main class constructs a snippetmanager class which maintains all the operations on the snippets.
@@ -183,15 +183,15 @@ This class takes care of the conversion between string type and Json type using 
     * contains the Gson object
 #### Operations
 * _JsonIO(): void_
-    *
+    * instantiatest a Gson object.
 * _getInstance(): JsonIO_
-    * Constructor function
+    * returns the singleton json object.
 * _writeToJson(pathToJson:String, object :Object): void_
-    *
+    * serializes an object.
 * _loadFromJson(pathToJson:String): Snippet_
-    *
+    * deserializes a Snippet.
 * _onException(e:Exception): void_
-    *
+    * handles exceptions like file not found or bad data.
 #### Associations
 * _JsonIO < Main_
     * already described
@@ -204,19 +204,19 @@ This class takes care of the conversion between string type and Json type using 
  
 #### Attributes
 * _snippetManager: SnippetManager_
-    * 
+    * the snippet manager used by the current instance of the app.
 * _cliUI: CliUI_
-    * 
+    * the cliUI used by the current instance of the app.
 #### Operations
 * _main(args:String[*]): void_
-    *
+    * Instantiates SnippetManager, CliUI and JsonIO. After this, CliUI handles the flow of the app.
 #### Associations
 * _Main > JsonIO_
-    * 
+    * instantiates.
 * _Main > SnippetManager_
-    * 
+    * instantiates.
 * _Main > CliUI_
-    * 
+    * instantiates.
     
 ## Object diagrams								
 Author(s): Yael Goede
