@@ -8,8 +8,7 @@ class Editor {
     private Snippet snippetToEdit;
 
     Editor(Snippet snippet) {
-        snippetToEdit = snippet;
-
+        snippetToEdit = snippet
         textArea = new RSyntaxTextArea(snippetToEdit.getContent());
         textArea.setSyntaxEditingStyle("text/"+snippetToEdit.getLanguage().toLowerCase());
 
