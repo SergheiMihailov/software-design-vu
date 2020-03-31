@@ -1,8 +1,7 @@
 public class Main {
     public static void main (String[] args){
-        SnippetManager snippetManager = new SnippetManager("snippo");
         new JsonIO();
-        CliUI cliUI = new CliUI(snippetManager);
+        CliUI cliUI = new CliUI("snippo");
 
         if (args.length == 0) {
             cliUI.uiLoop();

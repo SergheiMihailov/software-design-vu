@@ -1,0 +1,10 @@
+{
+  "pathToJson": "snippo/1",
+  "title": "test.py",
+  "content": "it works\nprint(\"Hello world\")",
+  "language": "Python",
+  "gistsId": "2adb7a4bd683af90fc5d9806302f095a",
+  "tags": [],
+  "createdDate": "2020-03-30",
+  "modifiedDate": "2020-03-31"
+}

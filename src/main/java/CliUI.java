@@ -1,14 +1,61 @@
+import java.util.Base64;
 import java.util.Scanner;
+
 
 class CliUI {
     private SnippetManager snippetManager;
     private boolean isOpen;
     private Scanner keyboard;
 
-    CliUI(SnippetManager snippetManager) {
-        this.snippetManager = snippetManager;
+    private boolean usesGithub = false;
+    private boolean usesToken = false;
+    private String githubCredentials = null;
+
+    CliUI(String pathToSnippoDir) {
         isOpen = true;
         keyboard = new Scanner(System.in);
+
+        logIn();
+
+        if (usesGithub) {
+            String authorization;
+            if (usesToken) {
+                authorization = "token " + githubCredentials;
+            } else {
+                authorization = "Basic " + Base64.getEncoder().withoutPadding().encodeToString(githubCredentials.getBytes());
+            }
+
+            GistsApi.setAuthorization(authorization);
+        } else {
+            GistsApi.setUsesGithub(usesGithub);
+        }
+
+        this.snippetManager = new SnippetManager(pathToSnippoDir);
+    }
+
+    void logIn() {
+        System.out.println(
+                "1. Github log in using Github access token (preferred)\n" +
+                "2. Github log in using username and password (to be deprecated)\n" +
+                "3. Use Snippo as a guest (no access to Github Gists, only local snippets)"
+        );
+
+        int input = keyboard.nextInt();
+
+        switch (input) {
+            case 1: {
+                System.out.println("Please enter your Github access token:");
+                githubCredentials = keyboard.next();
+                usesGithub = true;
+                usesToken = true;
+            } break;
+            case 2: {
+                System.out.println("Please enter your Github credentials using the following format: username:password");
+                usesGithub = true;
+                githubCredentials = keyboard.next();
+            } break;
+            default: break;
+        }
     }
 
     void uiLoop() {

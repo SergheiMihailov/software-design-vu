@@ -3,16 +3,19 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 class SnippetManager {
+
     private String pathToSnippoDir;
     private HashMap<Integer, Snippet> snippets = new HashMap<>();
 
     SnippetManager(String pathToSnippoDir) {
         this.pathToSnippoDir = pathToSnippoDir;
-
-        loadSnippets() ;
+        loadSnippetsFromLocal();
+        if (GistsApi.getUsesGithubGists()) {
+            syncWithGithubGistsAtStartup();
+        }
     }
 
-    private void loadSnippets() {
+    private void loadSnippetsFromLocal() {
         // Make sure the Snippo folder is present
         File snippoFolder = new File(pathToSnippoDir);
         if (snippoFolder.mkdir()) {
@@ -26,6 +29,44 @@ class SnippetManager {
                 snippets.put(snippetId, loadedSnippet);
             }
         }
+    }
+
+    private void syncWithGithubGistsAtStartup() {
+        // Step A. POST local snippets that are not on Gists
+        this.snippets.values().forEach(snippet -> {
+            if (snippet.getGistsId() == null) {
+                snippet.postSnippetToGithubGists();
+            }
+        });
+
+        // Step B. GET Gists that are not in the local directory
+        List<Snippet> loadedSnippets = GistsApi.getInstance().getAllSnippets();
+        List<String> localSnippetsIds = new ArrayList<String>();
+
+        for (Snippet snippet : this.snippets.values()) {
+            localSnippetsIds.add(snippet.getGistsId());
+        }
+
+        List<Snippet> snippetsNotOnLocal = loadedSnippets.stream()
+                .filter(snippet -> !localSnippetsIds.contains(snippet.getGistsId()))
+                .collect(Collectors.toList());
+
+        for (final Snippet snippet : snippetsNotOnLocal) {
+            Integer snippetId = getNextId();
+            snippet.setPathToJson(generatePathToSnippetJson(snippetId));
+            this.snippets.put(snippetId, snippet);
+            snippet.writeSnippetToJson();
+        }
+
+        // Step C. PATCH (take the version that is latest) for each snippet present on both Gists and local
+        //         E.g. if last modification was on Gists, the Gist version will be taken.
+        //         Otherwise take the local version.
+        //         the conflict is resolved at the snippet level
+        //         It made sense to sync all of them as filtering would add too much complexity and most snippets
+        //         are present on both Gists and local
+
+        this.snippets.values().forEach(Snippet::syncWithGithubGists);
+
     }
 
     private String generatePathToSnippetJson(Integer snippetId) {
@@ -48,11 +89,10 @@ class SnippetManager {
 
     Integer create(String title, String content, String language, String[] tags) {
         Integer newSnippetId = getNextId();
-        snippets.put(
-                newSnippetId,
-                new Snippet(generatePathToSnippetJson(newSnippetId), title, content, language, tags)
-        );
-
+        Snippet newSnippet =
+                new Snippet(generatePathToSnippetJson(newSnippetId), title, content, language, null, tags);
+        snippets.put(newSnippetId, newSnippet);
+        if (GistsApi.getUsesGithubGists()) newSnippet.postSnippetToGithubGists();
         return newSnippetId;
     }
 
@@ -68,6 +108,7 @@ class SnippetManager {
     void delete(Integer id) {
         if (isValidId(id)) {
             if (new File(generatePathToSnippetJson(id)).delete()) {
+                GistsApi.getInstance().deleteSpecificSnippet(snippets.get(id).getGistsId());
                 snippets.remove(id);
             } else {
                 System.out.println("Cannot delete the snippet and its file. Id: " + id);
@@ -92,11 +133,13 @@ class SnippetManager {
                 .filter(
                         entry -> entry.getValue().getTitle().contains(wordToContain) ||
                                 entry.getValue().getContent().contains(wordToContain)
-                )
+                ) // Match words
                 .filter(entry -> language.equals("") ||
-                        entry.getValue().getLanguage().equals(language))
+                        entry.getValue().getLanguage().equals(language)
+                ) // Match language
                 .filter(entry -> (tags.length == 1 && tags[0].equals("")) ||
-                        Arrays.asList(entry.getValue().getTags()).containsAll(Arrays.asList(tags)))
+                        Arrays.asList(entry.getValue().getTags()).containsAll(Arrays.asList(tags))
+                ) // Match tags
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
