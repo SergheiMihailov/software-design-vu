@@ -250,7 +250,37 @@ The goal of your state machine diagrams is both descriptive and prescriptive, so
 Maximum number of words for this section: 4000
 
 ## Sequence diagrams									
-Author(s): `name of the team member(s) responsible for this section`
+Author(s): Milos Delgorge
+### Sequence diagram for Creating a snippet
+![Sequence diagram](SEQDCreateSS.png)
+### Description
+The user selects create in the Command line interface. After selecting create, the user is prompted 
+with 3 reply messages asking for the title, language and tags for the snippet the user wants to create. 
+After the user provides this information, the Command line interface calls create() to the snippet 
+manager, which will fist call a method called getNextId, which will return the next available
+ID the snippet can have. After it has the ID, the snippet manager creates a new instance of a snippet with that ID and the information specified by the user. When a new snippet is constructed, a new file is made and the snippet calls writeSnippetToJson, which is part of the JsonIO class. 
+This will write the relevant data for the snippet to the file.
+The snippet objects are stored in a hashmap called snippets. 
+After a new snippet object is created, the snippet manager adds a new entry to the hashmap, 
+containing the ID and created snippet. 
+After this is done, the snippet manager will call edit on that snippet, and the user will be able to start writing the contents for their newly created snippet.
+
+### Sequence diagram for Editing a snippet
+![Sequence diagram](SEQDEditSS.png)
+### Description
+When the user choses the edit snippet option from the Command line interface and provided the ID of the snippet he/she wants to edit back to the Cli, the Cli makes a call Edit to the snippet manager class. fist the snippet manager will check if the ID the user provided is valid. If the ID is not valid, an error message will be prompted to the user through the Command line interface. If the ID is valid, the snippet manager will send a message to the snippet that is about to be edited, Edit(snippetToEdit). The snippet will then open an editor. When this instance of the editor
+class is constructed, it will grab the content from the snippet the user has selected to edit by calling getContent on the snippet and will display that in the textfield. Now that the editor is open the user can freely edit the contents of the snippet. When the user has edited his/hers snippet and wishes to close 
+out of the editor and presses save, the method setContent is called on the snippet
+object that’s currently being edited. This method is responsible for updating the Json snippet’s content. The argument passed to this method is getFullEditorContent, which returns the current content in the editor. When setContent is called on the snippet object, the snippet calls the method writeToJson, which is part of the JsonIO class. This method updates the Json object so that the changes are actually saved. This JsonIO class is a singleton class that is nice to have, because then the snippet manager doesn’t have to be responsible for saving snippets, but the snippets can “save themselves” by using that helper class, which is good for modularity, and will make changing specific details in the way snippets are saved/stored easier to do because of the fact there are less dependencies between classes.
+
+### Sequence diagram for the filter method
+![Sequence diagram](SSSEQDFilter.png)
+### Description						
+The user selects the filter option in the Command line interface. 
+The Cli will return a message asking the user to specify filterterms, language, and tags to filter by.
+After the user has provided these arguments to the Cli, the Cli then calls Filter() with those parameters to the snippet manager. Filter will return a string object that contains snippets. 
+This string is constructed by the listSnippet method. listSnippet will return all snippets in string form, but with the filter method we reduce that to only the snippets that conform to the filter specified by the user. 
+This string will be provided back to the Cli, which then prints that string for the user to see.	
 
 This chapter contains the specification of at least 2 UML sequence diagrams of your system, together with a textual description of all its elements. Here you have to focus on specific situations you want to describe. For example, you can describe the interaction of player when performing a key part of the videogame, during a typical execution scenario, in a special case that may happen (e.g., an error situation), when finalizing a fantasy soccer game, etc.
 
