@@ -1,9 +1,12 @@
 {
   "pathToJson": "snippo/4",
-  "title": "testCreateGists",
-  "content": "asdga test create gists",
-  "gistsId": "2658b98f151cf9d3553228acb986d7b4",
-  "tags": [],
-  "createdDate": "2020-03-31",
-  "modifiedDate": "2020-03-31"
+  "title": "TestCreate2",
+  "content": "content",
+  "language": "java",
+  "gistsId": "ad023d98ebc05544b32fa222b3adb974",
+  "tags": [
+    "tah"
+  ],
+  "createdDate": "2020-56-01",
+  "modifiedDate": "2020-56-01"
 }

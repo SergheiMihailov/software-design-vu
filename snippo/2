@@ -1,9 +1,12 @@
 {
   "pathToJson": "snippo/2",
-  "title": "bivxi",
-  "content": "print(\"Hello world\")\n",
-  "gistsId": "e12781a0cdc6a155476f3b8dd69d7627",
-  "tags": [],
-  "createdDate": "2020-02-16",
-  "modifiedDate": "2020-02-16"
+  "title": "TestCreate",
+  "content": "Test 2 Test Edit\nint a \u003d 3;",
+  "language": "java",
+  "gistsId": "ff49c5529dbcdc493507bf11817d7a0b",
+  "tags": [
+    "none"
+  ],
+  "createdDate": "2020-15-01",
+  "modifiedDate": "2020-38-01"
 }

@@ -61,7 +61,6 @@ class JsonIO {
                 .entrySet().iterator().next() // But we only need one file, the first one
                 .getValue().getAsJsonObject(); // This json object contains all the relevant data
 
-
         Snippet parsedSnippet = new Snippet(
                 null,
                 getAsStringIncludingNull(relevantGistData, "filename"),
