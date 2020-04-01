@@ -252,6 +252,7 @@ This class takes care of the conversion between string type and Json type using 
     * instantiates.
 
 ### class: GistsApi
+
 This class is responsible for the integration of Githubs Gists with our application
 #### Attributes
 * _httpClient: String: HttpClient_
@@ -288,12 +289,12 @@ This class is responsible for the integration of Githubs Gists with our applicat
 * _onException(Exception e): Void_
     * handles errors.
 #### Associations
-* __
-    *  .
-* __
-    * 
-* __
-    * 
+* GistsApi > SnippetManager 
+    *  provides api.
+* GistsApi > snippet
+    * provides api.
+* GistsApi > JSonIo
+    * provides api.
 ## Object diagrams								
 Author(s): Yael Goede
 
