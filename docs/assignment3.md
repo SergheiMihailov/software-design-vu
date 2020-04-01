@@ -1,11 +1,5 @@
 # Assignment 3
 
-Maximum number of words for this document: 18000
-
-**IMPORTANT**: In this assignment you will fully model and impement your system. The idea is that you improve your UML models and Java implementation by (i) applying (a subset of) the studied design patterns and (ii) adding any relevant implementation-specific details (e.g., classes with “technical purposes” which are not part of the domain of the system). The goal here is to improve the system in terms of maintainability, readability, evolvability, etc.    
-
-**Format**: establish formatting conventions when describing your models in this document. For example, you style the name of each class in bold, whereas the attributes, operations, and associations as underlined text, objects are in italic, etc.
-
 ### Summary of changes of Assignment 2
 Author(s): Milos
 
@@ -19,7 +13,7 @@ Author(s): Milos
 - Our CliUI no longer crashes when user inputs an invalid character.
 
 ### Application of design patterns
-Author(s): `name of the team member(s) responsible for this section`
+Author(s): Yael Goede
 
 `Figure representing the UML class diagram in which all the applied design patterns are highlighted graphically (for example with a red rectangle/circle with a reference to the ID of the applied design pattern`
 
@@ -27,12 +21,12 @@ For each application of any design pattern you have to provide a table conformin
 
 | ID  | DP1  | DP1 | DP2 |
 |---|---| --- | --- | 
-| **Design pattern**  | Name of the applied pattern | Singleton Design | Object pool Pattern |
-| **Problem**  | A paragraph describing the problem you want to solve | Some classed in our application should only have one access point to it to ensure its intended use | To optimise for efficiency the application needs to be efficient with expensive resources |
-| **Solution**  | A paragraph describing why with the application of the design pattern you solve the identified problem | This design pattern ensures that a class has only one instance and provides a global point of access to it | This design pattern ensures that the application reuses objects that are expensive to create, end therefore optimises for efficiency for available resources |
-| **Intended use**  | A paragraph describing how you intend to use at run-time the objects involved in the applied design patterns (you can refer to small sequence diagrams here if you want to detail how the involved parties interact at run-time | We will be using this design pattern to ensure our stored data will be accessed and read in a save and correct way by offering a single point of access which we can design and thus control | The main application of this design pattern will be to optimise the use of snippets in our system, creating a lifecycle to minimise disk usage |
-| **Constraints**  | Any additional constraints that the application of the design pattern is imposing, if any | Our solution is also our constraint sinds a big part of our application is now dependend on this pattern to access information. Dependency wise, this is not ideal | * |
-| **Additional remarks**  | Optional, only if needed | * | * |
+| **Design pattern** | Singleton Design | Object pool Pattern |
+| **Problem** | Some classed in our application should only have one access point to it to ensure its intended use | To optimise for efficiency the application needs to be efficient with expensive resources |
+| **Solution**  | This design pattern ensures that a class has only one instance and provides a global point of access to it | This design pattern ensures that the application reuses objects that are expensive to create, end therefore optimises for efficiency for available resources |
+| **Intended use**   We will be using this design pattern to ensure our stored data will be accessed and read in a save and correct way by offering a single point of access which we can design and thus control | The main application of this design pattern will be to optimise the use of snippets in our system, creating a lifecycle to minimise disk usage |
+| **Constraints**  | Our solution is also our constraint sinds a big part of our application is now dependend on this pattern to access information. Dependency wise, this is not ideal | * |
+| **Additional remarks**  | * | * |
 
 Maximum number of words for this section: 2000
 
