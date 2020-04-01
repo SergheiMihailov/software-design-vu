@@ -302,7 +302,7 @@ In the diagram above a snapshot of the system is shown where the database class 
 The content field contains the actual code used as snippet by the user. The language field specifies the programming language which is valid for the content field. This field enables features such as the text highlighting feature, which is language specific.
 
 ## State machine diagrams									
-Author(s): `name of the team member(s) responsible for this section`
+Author(s): `Serghei`
 
 This chapter contains the specification of at least 2 UML state machines of your system, together with a textual description of all their elements. Also, remember that classes the describe only data structures (e.g., Coordinate, Position) do not need to have an associated state machine since they can be seen as simple "data containers" without behaviour (they have only stateless objects).
 
@@ -314,6 +314,25 @@ For each state machine you have to provide:
 The goal of your state machine diagrams is both descriptive and prescriptive, so put the needed level of detail here, finding the right trade-off between understandability of the models and their precision.
 
 Maximum number of words for this section: 4000
+
+![State Machine CLI Diagram](State_Machine_Cli.svg)
+- Class: CliUI
+- CliUI is the entry point of the application. It provides an user interface to the functionality of the program and is concerned with getting all of the user input except for the editor window and gists data. Moreover, CliUI also contains the logging in functionality (because it is too simple to have a class on its own). At the start of the app, the CliUI asks the user if the user would like to authorize and, if yes, in which way: by using their Github access token or Basic auth. Then, depending on the option selected, CliUI will set the relevant static variables as necessary and proceed. If the app was called using command-line arguments, it will execute the respective command and exit. Otherwise (the more common use case), the UI loop will start: dispay menu, get command, execute command, repeat until the command is QUIT.
+
+---
+![State Machine Snippet Diagram](State_Machine_Snippet1.png)
+- Class: Snippet
+- The Snippet class contains most of the data of the application. Its main role, once instantiated, is to allow simple data manipulation, such as setting content, tags, title, and synchronization. We that it would be ideal to let the snippet handle its own synchronization. 
+- The snippet starts off being incomplete, in one of 4 states: 
+    1. loaded from local json and already having gistsId (previously synced)
+    2. loaded from Gists and thus not being on local (otherwise it would've been in the state above)
+    3. loaded from local json but not having gistsId (never synced with Gists)
+    4. created from the user interface and not yet having gistsId or content (because the user is editing the content)
+- A snippet from state 1 just gets synced on startup, after a call from the Snippet Manager.
+- A snippet from state 2 has just been obtained from the API response but does not have a local file yet. It is assigned one by the SnippetManager and the data is written to local json.
+- Snippets in state 3 and 4 need to sync with Gists, so a POST request to Gists is made and the response contains their Gists id. 
+- After all this, each snippet becomes complete (in terms of data) and synchronized.
+- It can make a state transition if it is edited, thus becoming temporarily out of sync. Then it transitions back into the previous state.
 
 ## Sequence diagrams									
 Author(s): Milos Delgorge
