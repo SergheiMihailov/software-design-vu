@@ -7,14 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a471f4b7-c38c-420c-99b4-288c14ddc065" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/docs/State_Machine_Cli.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/State_Machine_Snippet1.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/assignment3.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/assignment3.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/cli_stateDiagram.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Snippet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Snippet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SnippetManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SnippetManager.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

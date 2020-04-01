@@ -13,20 +13,40 @@ Author(s): Milos
 - Our CliUI no longer crashes when user inputs an invalid character.
 
 ### Application of design patterns
-Author(s): Yael Goede
+Author(s): Serghei Mihailov, Yael Goede
 ![Class Diagram](DesignPattern.png)
 
-| ID  | DP1  | DP1 | DP2 |
-|---|---| --- | --- | 
-| **Design pattern** | Singleton Design | Object pool Pattern |
+| ID  | DP1  | 
+|---|---|
+| **Design pattern** | Singleton Design | 
 | **Problem** | Some classed in our application should only have one access point to it to ensure its intended use | To optimise for efficiency the application needs to be efficient with expensive resources |
 | **Solution**  | This design pattern ensures that a class has only one instance and provides a global point of access to it | This design pattern ensures that the application reuses objects that are expensive to create, end therefore optimises for efficiency for available resources |
 | **Intended use**   We will be using this design pattern to ensure our stored data will be accessed and read in a save and correct way by offering a single point of access which we can design and thus control | The main application of this design pattern will be to optimise the use of snippets in our system, creating a lifecycle to minimise disk usage |
 | **Constraints**  | Our solution is also our constraint sinds a big part of our application is now dependend on this pattern to access information. Dependency wise, this is not ideal | * |
-| **Additional remarks**  | * | * |
+| **Additional remarks**  | * |
+
+We had thoughts about using several design patterns in our application, but decided against for the sake of simplicity, so as not to add patterns that do not solve a real problem. Nevertheless, we will provide an argument for this.
+We used the Singleton pattern on two occasions: for JsonIO and for GistsApi. 
+- JsonIO : It does not make sense to instantiate a json encoder-decoder and pass it to each object when we can have a static one.
+- GistsApi: The same as said about JsonIO. Moreover, GistsApi contains a few parameters, such as
+authorization, that are unique for an instance of the application and can be easily modifiable
+and readable when in a Singleton class.
+
+The patterns we tried / considered using but discarded:
+- Overloading: for a few versions of the app we had an overloaded constructor of the Snippet class that would create the snippet from a gistId. We ended up giving the responsibility to GistsApi to return a snippet when provided with a gistId. 
+The reason behind this is that it shortens the path between the call to the function that should return the snippet and 
+the actual action of getting it from GistsApi. Otherwise we would have to pass maps with snippet arguments from JsonIO to GistsApi to Snippet instead of much more suitable Snippet objects.
+- Composite: We considered extending our app to handle not just single-file snippets but directories of snippets/directories, following the example of Gists. It would be great to implement this design pattern, but, 
+unfortunately, that would be a lot of work to implement this feature.
+- Builder: As it is mentioned in the State Diagrams, there are states of the Snippet when not all of its attributes are/can be defined.
+Then we can gradually add them, this way we would explicitly indicate at what stage of completeness the Snippet is. We thought that the solution would add more complexity
+than the problem creates and decided to use null values with setAttribute(value).
+- Observer: This would come in handy as the application develops: changes to a snippet would be trigger events across the whole application. At this point, changes to a snippet only are trigger events to
+the snippet itself, and are handled by the method onModification().
+- Command: to use with the CliUI to enable advanced behaviour on commands, like queuing and logging, better handling of commands.
 
 ## Class diagram									
-Author(s): `Yael Goede`, `Serghei Mihailov`
+Author(s): `Yael Goede`, `Milos`, `Serghei Mihailov`
 
 ![Class Diagram](UpdatedClassDiagram.png)
 
@@ -303,17 +323,6 @@ The content field contains the actual code used as snippet by the user. The lang
 
 ## State machine diagrams									
 Author(s): `Serghei`
-
-This chapter contains the specification of at least 2 UML state machines of your system, together with a textual description of all their elements. Also, remember that classes the describe only data structures (e.g., Coordinate, Position) do not need to have an associated state machine since they can be seen as simple "data containers" without behaviour (they have only stateless objects).
-
-For each state machine you have to provide:
-- the name of the class for which you are representing the internal behavior;
-- a figure representing the part of state machine;
-- a textual description of all its states, transitions, activities, etc. in a narrative manner (you do not need to structure your description into tables in this case). We expect 3-4 lines of text for describing trivial or very simple state machines (e.g., those with one to three states), whereas you will provide longer descriptions (e.g., ~500 words) when describing more complex state machines.
-
-The goal of your state machine diagrams is both descriptive and prescriptive, so put the needed level of detail here, finding the right trade-off between understandability of the models and their precision.
-
-Maximum number of words for this section: 4000
 
 ![State Machine CLI Diagram](State_Machine_Cli.svg)
 - Class: CliUI
