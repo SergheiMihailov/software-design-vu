@@ -82,7 +82,7 @@ This class represents the snippet objects, and thus contains the meta data and o
 * _toString(): String_
     * Combines all the field of the snippet object into a readable String.
 * _clone(Snippet snippetToClone): void_
-    * 
+    * a helper function for the parser that parses gist objects to our snippet objects
 * _syncWithGithubGists(): void_
     * will post a locally created snippet to gist if its not there already.
 * _postSnippetToGithubGists(): void_
@@ -93,7 +93,7 @@ This class represents the snippet objects, and thus contains the meta data and o
     * will retrieve a snippet from github gist
 * _getGistsId(): String_
     * getter function for the id for the gists in github
-    * getter function for the id for the gists in github
+  
   
 #### Associations
 * _Snippet > JsonIO_
@@ -222,9 +222,9 @@ This class takes care of the conversion between string type and Json type using 
 * _parseSnippetAttributesFromGistsApi(String snippetData): Snippet_
     * 
 * _snippetToGistsCompatibleObject(Snippet snippet): String_
-    * 
+    * responsible for parsing a gist snippet to our own snippet object
 * _getAsStringIncludingNull(JsonObject obj, String attribute): String_
-    * 
+    * transforms objects into a string, a helper function for the parser.
 #### Associations
 * _JsonIO < Main_
     * already described
