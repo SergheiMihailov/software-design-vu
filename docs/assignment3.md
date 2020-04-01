@@ -51,6 +51,8 @@ This class represents the snippet objects, and thus contains the meta data and o
     * the title attribute gives a quick summary of the contents of the snippet, this improves the usability and retrievability of the snippet.
 * _content_
     * this is where the actual snippet code is stored.
+* _gistId_
+    * the Id for the snippet on gist.
 * _language_
     * This attributes specifies the language the snippet utilises.
 * _tags_
@@ -90,6 +92,19 @@ This class represents the snippet objects, and thus contains the meta data and o
     * returns last modification date
 * _toString(): String_
     * Combines all the field of the snippet object into a readable String.
+* _clone(Snippet snippetToClone): void_
+    * 
+* _syncWithGithubGists(): void_
+    * 
+* _postSnippetToGithubGists(): void_
+    * 
+* _patchSnippetToGithubGists(): void_
+    * 
+* _pullSnippetFromGithubGists(): void_
+    * 
+* _getGistsId(): String_
+    * 
+  
 #### Associations
 * _Snippet > JsonIO_
     * described
@@ -183,6 +198,11 @@ This class keeps track of all the snippets and is the only class able to modify 
     * returns the relative path for the requested snippet (by id).
 * _getSnippets(): HashMap<Integer; Snippet>_
     * returns all the managed snippets as an integer-snippet hashmap.
+* _loadSnippetsFromLocal(): void_
+     *
+* _syncWithGithubGistsAtStartup(): void_
+     * This function makes sure that on startup, the locally saved snippet and gist saved snippets match. It will first get the local snippets, and then the ones saved on gist. If 2 instances of a snippet are different, it will pick the one that is updated the most recent.
+ 
 #### Associations
 * _SnippetManager < Main_
     *  On the start of the program the main class constructs a snippetmanager class which maintains all the operations on the snippets.
@@ -207,6 +227,14 @@ This class takes care of the conversion between string type and Json type using 
     * deserializes a Snippet.
 * _onException(e:Exception): void_
     * handles exceptions like file not found or bad data.
+* _parseSnippetsFromGistsApi(String allSnippetsData): List<Snippet>_
+    * 
+* _parseSnippetAttributesFromGistsApi(String snippetData): Snippet_
+    * 
+* _snippetToGistsCompatibleObject(Snippet snippet): String_
+    * 
+* _getAsStringIncludingNull(JsonObject obj, String attribute): String_
+    * 
 #### Associations
 * _JsonIO < Main_
     * already described
@@ -232,7 +260,50 @@ This class takes care of the conversion between string type and Json type using 
     * instantiates.
 * _Main > CliUI_
     * instantiates.
-    
+
+### class: GistsApi
+This class is responsible for the integration of Githubs Gists with our application
+#### Attributes
+* _httpClient: String: HttpClient_
+    * .
+* _authorization: string_
+    * .
+* _usesGithub: boolean_
+    * .
+#### Operations
+* _SnippetManager(pathToSnippoDir:String): void_
+    * Constructor function
+* _getInstance(): GistsApi_
+    * returns instance of the GistsApi singleton.
+* _setAuthorization(String providedAuthorization): Void_
+    * .
+* _setUsesGithub(boolean providedUsesGithub): Void_
+    * boolean that shows wether or not the user is using github gists integration
+* _getUsesGithubGists(): Boolean_
+    * getter function for the usesGithub variable
+* _getAllSnippets(): List<Snippet>_
+    * returns all the gists and parses them to match our snippets
+* _getSpecificSnippet(String gistsId): Snippet_
+    * returns a specific gist with passed gistId
+* _postSpecificSnippet(Snippet snippet): String_
+    * posts a snippet to gist
+* _patchSpecificSnippet(Snippet snippet): Void_
+    * updates a specific snippet to gist
+* _deleteSpecificSnippet(String gistId): Void_
+    * deletes a specific snippet from gist
+* _sendHttpRequest(HttpRequest request):HttpResponse<String>
+    * .
+* _buildHttpRequest(String method, String url, String body): HttpRequest_
+    * .
+* _onException(Exception e): Void_
+    * .
+#### Associations
+* __
+    *  .
+* __
+    * 
+* __
+    * 
 ## Object diagrams								
 Author(s): Yael Goede
 
