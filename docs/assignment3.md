@@ -255,9 +255,9 @@ This class takes care of the conversion between string type and Json type using 
 This class is responsible for the integration of Githubs Gists with our application
 #### Attributes
 * _httpClient: String: HttpClient_
-    * .
+    * HttpClient object.
 * _authorization: string_
-    * .
+    * authorization token that github uses.
 * _usesGithub: boolean_
     * boolean that shows wether the user has linked his github or not.
 #### Operations
@@ -266,7 +266,7 @@ This class is responsible for the integration of Githubs Gists with our applicat
 * _getInstance(): GistsApi_
     * returns instance of the GistsApi singleton.
 * _setAuthorization(String providedAuthorization): Void_
-    * .
+    * set the authorization token to the one the users has provided on login.
 * _setUsesGithub(boolean providedUsesGithub): Void_
     * boolean that shows wether or not the user is using github gists integration
 * _getUsesGithubGists(): Boolean_
@@ -282,11 +282,11 @@ This class is responsible for the integration of Githubs Gists with our applicat
 * _deleteSpecificSnippet(String gistId): Void_
     * deletes a specific snippet from gist
 * _sendHttpRequest(HttpRequest request):HttpResponse<String>
-    * .
+    * send a http request, used to send the request to the Gists api.
 * _buildHttpRequest(String method, String url, String body): HttpRequest_
-    * .
+    * build a http request, used to build the reqeusts we send to the Gists api
 * _onException(Exception e): Void_
-    * .
+    * handles errors.
 #### Associations
 * __
     *  .
