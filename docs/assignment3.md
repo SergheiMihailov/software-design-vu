@@ -28,7 +28,7 @@ Author(s): Yael Goede
 ## Class diagram									
 Author(s): `Yael Goede`, `Serghei Mihailov`
 
-![Class Diagram](ClassDiagramSerghei.svg)
+![Class Diagram](UpdatedClassDiagram.png)
 
 ### class: Snippet
 This class represents the snippet objects, and thus contains the meta data and original data from the snippet.
