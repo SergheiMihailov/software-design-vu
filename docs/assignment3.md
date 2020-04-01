@@ -28,8 +28,6 @@ For each application of any design pattern you have to provide a table conformin
 | **Constraints**  | Our solution is also our constraint sinds a big part of our application is now dependend on this pattern to access information. Dependency wise, this is not ideal | * |
 | **Additional remarks**  | * | * |
 
-Maximum number of words for this section: 2000
-
 ## Class diagram									
 Author(s): `Yael Goede`, `Serghei Mihailov`
 
