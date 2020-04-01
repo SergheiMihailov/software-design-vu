@@ -63,7 +63,7 @@
 											"top": 23,
 											"width": 352.2822265625,
 											"height": 13,
-											"text": "SnippetDB"
+											"text": "SnippetManager"
 										},
 										{
 											"_type": "LabelView",
@@ -3558,7 +3558,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "SnippetDB",
+					"name": "SnippetManager",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
