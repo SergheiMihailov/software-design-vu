@@ -1,4 +1,5 @@
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.Scanner;
 
 
@@ -41,18 +42,19 @@ class CliUI {
         );
 
         int input = keyboard.nextInt();
+        keyboard.nextLine(); // Gets rid of the stray newline in the buffer
 
         switch (input) {
             case 1: {
                 System.out.println("Please enter your Github access token:");
-                githubCredentials = keyboard.next();
+                githubCredentials = keyboard.nextLine();
                 usesGithub = true;
                 usesToken = true;
             } break;
             case 2: {
                 System.out.println("Please enter your Github credentials using the following format: username:password");
                 usesGithub = true;
-                githubCredentials = keyboard.next();
+                githubCredentials = keyboard.nextLine();
             } break;
             default: break;
         }
@@ -61,16 +63,25 @@ class CliUI {
     void uiLoop() {
         while (isOpen) {
             displayMenu();
-            getAndExecuteCommand();
+            executeCommand();
         }
     }
 
     private void displayMenu() {
-        System.out.println("Menu:\n1. View all snippets\n2. Create a snippet\n3. Delete a snippet\n4. Edit a snippet\n5. Filter\n6. Quit");
+        System.out.println(
+                "Menu:\n" +
+                "1. View all snippets\n" +
+                "2. Create a snippet\n" +
+                "3. Delete a snippet\n" +
+                "4. Edit a snippet\n" +
+                "5. Filter\n" +
+                "6. Search\n" +
+                "7. Quit");
     }
 
-    private void getAndExecuteCommand() {
+    private void executeCommand() {
         int input = keyboard.nextInt();
+        keyboard.nextLine(); // Gets rid of the stray newline in the buffer
 
         switch (input) {
             case 1: System.out.println(snippetManager.listAll()); break;
@@ -78,57 +89,68 @@ class CliUI {
             case 3: deleteSnippet(); break;
             case 4: editSnippet(); break;
             case 5: filterSnippets(); break;
-            case 6: isOpen = false; break;
+            case 6: searchSnippets(); break;
+            case 7: isOpen = false; break;
             default: System.out.println(input + ": please select a valid option");
         }
     }
 
     private void createSnippet() {
         System.out.println("Enter the title of the snippet:");
-        String title = keyboard.next();
+        String title = keyboard.nextLine();
 
         System.out.println("Enter the language of the snippet:");
-        String lang = keyboard.next();
+        String lang = keyboard.nextLine();
 
         System.out.println("Enter the tags of the snippet, like tag1,tag2,...:");
-        String[] tags = keyboard.next().split(",");
+        String[] tags = keyboard.nextLine().split(",");
 
-        Integer snippetId = snippetManager.create(title, "", lang, tags);
-        snippetManager.edit(snippetId);
+        snippetManager.create(title, null, lang, tags);
     }
 
     private void deleteSnippet() {
         System.out.println("Enter the id of the snippet to delete:");
         int input = keyboard.nextInt();
+        keyboard.nextLine(); // Gets rid of the stray newline in the buffer
         snippetManager.delete(input);
     }
 
     private void editSnippet() {
         System.out.println("Enter the id of the snippet to edit");
         Integer snippetId = keyboard.nextInt();
+        keyboard.nextLine(); // Gets rid of the stray newline in the buffer
         snippetManager.edit(snippetId);
     }
 
     private void filterSnippets() {
-        System.out.println("Enter the title to filter by (... for none):");
-        String title = keyboard.next();
-        if (title.equals("...")) {
-            title = "";
+        System.out.println("Enter the term to filter by (... for none):");
+        String filterTerm = keyboard.nextLine();
+        if (filterTerm.equals("...")) {
+            filterTerm = "";
         }
 
         System.out.println("Enter the language of the snippet (... for none):");
-        String lang = keyboard.next();
+        String lang = keyboard.nextLine();
         if (lang.equals("...")) {
             lang = "";
         }
 
         System.out.println("Enter the tags of the snippet, like tag1,tag2,...: (... for none)");
-        String[] tags = keyboard.next().split(",");
+        String[] tags = keyboard.nextLine().split(",");
         if (tags[0].equals("...")) {
             tags[0] = "";
         }
 
-        System.out.println(snippetManager.listSnippets(snippetManager.filter(title, lang, tags)));
+        System.out.println(snippetManager.listSnippets(snippetManager.filterSnippets(filterTerm, lang, tags)));
+    }
+
+    private void searchSnippets() {
+        System.out.println("Enter the term(s) to search by (... for none):");
+        String searchTerm = keyboard.nextLine();
+        if (searchTerm.equals("...")) {
+            searchTerm = "";
+        }
+        System.out.println(snippetManager.listSearchedSnippets(this.snippetManager.searchSnippets(searchTerm)));
     }
 
     void runCommandsOnArgs(String[] args) {
@@ -147,7 +169,10 @@ class CliUI {
                 System.out.println(snippetManager.listAll());
                 break;
             case "filter":
-                System.out.println(snippetManager.filter(args[1], args[2], args[3].split(",")));
+                System.out.println(snippetManager.filterSnippets(args[1], args[2], args[3].split(",")));
+                break;
+            case "search":
+                System.out.println(snippetManager.searchSnippets(args[1]));
                 break;
             case "edit":
                 snippetManager.edit(Integer.parseInt(args[1]));

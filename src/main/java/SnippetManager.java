@@ -70,8 +70,8 @@ class SnippetManager {
     String listSnippets(Map<Integer, Snippet> snippetsToList) {
         StringBuilder response = new StringBuilder("All snippetsToList: \n");
 
-        for (Integer snippetId: snippetsToList.keySet()) {
-            response.append("Id: "+snippetId+"; ").append(snippetsToList.get(snippetId).toString()).append("\n");
+        for (Map.Entry<Integer, Snippet> snippetEntry: snippetsToList.entrySet()) {
+            response.append("Id: "+snippetEntry.getKey()+"; ").append(snippetEntry.getValue().toString()).append("\n");
         }
 
         return response.toString();
@@ -120,7 +120,7 @@ class SnippetManager {
         }
     }
 
-    Map<Integer, Snippet> filter(String wordToContain, String language, String[] tags) {
+    Map<Integer, Snippet> filterSnippets(String wordToContain, String language, String[] tags) {
         return snippets.entrySet()
                 .stream()
                 .filter(
@@ -134,6 +134,62 @@ class SnippetManager {
                         Arrays.asList(entry.getValue().getTags()).containsAll(Arrays.asList(tags))
                 ) // Match tags
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+    }
+
+    List<Map.Entry<Integer,Snippet>> searchSnippets(String searchTerm) {
+        ArrayList<String> terms = new ArrayList<>(Arrays.asList(searchTerm.split(" ")));
+        terms.forEach(String::toLowerCase);
+        terms.stream().map(term -> term.replaceAll("[^a-zA-Z0-9]", "")).collect(Collectors.toList());
+
+        HashMap<Integer, Integer> matchesPerSnippet = new HashMap<>();
+
+        for (String term : terms) {
+            snippets.entrySet().forEach(entry -> {
+                        Integer key = entry.getKey();
+                        String snippetText = entry.getValue().getContent() + " "
+                                + entry.getValue().getTitle() + " "
+                                + entry.getValue().getLanguage();
+
+                        Integer termOccCount = Math.toIntExact(
+                                Arrays.stream(snippetText.split("[ ,\\.]"))
+                                        .filter(word -> word.equals(term))
+                                        .count());
+
+                        if (matchesPerSnippet.containsKey(key)) {
+                            matchesPerSnippet.put(key, matchesPerSnippet.get(key) + termOccCount);
+                        } else {
+                            matchesPerSnippet.put(key, termOccCount);
+                        }
+                    }
+            );
+        }
+
+        List<Map.Entry<Integer, Integer>> idsByRelevance = new LinkedList<>(matchesPerSnippet.entrySet());
+        idsByRelevance.sort(Map.Entry.comparingByValue());
+        List<Map.Entry<Integer, Snippet>> snippetsByRelevance = new ArrayList<>();
+        for (int i = idsByRelevance.size() - 1; i >= 0; i--) {
+            if (matchesPerSnippet.get(idsByRelevance.get(i).getKey()) > 0) {
+                snippetsByRelevance.add(
+                        new AbstractMap.SimpleEntry<Integer, Snippet>(
+                                idsByRelevance.get(i).getKey(),
+                                snippets.get(idsByRelevance.get(i).getKey())
+                        )
+                );
+            }
+        }
+        return snippetsByRelevance;
+    }
+
+    String listSearchedSnippets(List<Map.Entry<Integer, Snippet>> snippetsToList) {
+        StringBuilder response = new StringBuilder("All snippetsToList: \n");
+
+        for (int i = 0; i < snippetsToList.size(); i++) {
+            Integer snippetId = snippetsToList.get(i).getKey();
+            Snippet snippet = snippetsToList.get(i).getValue();
+            response.append("Id: "+ snippetId.toString()+"; ").append(snippet.toString()).append("\n");
+        }
+
+        return response.toString();
     }
 
     // Returns the next available Id for a new snippet

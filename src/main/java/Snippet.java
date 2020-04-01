@@ -21,6 +21,10 @@ public class Snippet {
         this.tags = tags;
         this.createdDate = new Date();
         this.modifiedDate = new Date();
+
+        if (content == null) {
+            edit();
+        }
     }
 
     void clone(Snippet snippetToClone) {
@@ -75,7 +79,9 @@ public class Snippet {
 
     private void pullSnippetFromGithubGists() {
         String savedPathToJson = pathToJson;
+        String[] savedTags = tags.clone();
         this.clone(GistsApi.getInstance().getSpecificSnippet(this.gistsId));
+        this.tags = savedTags;
         this.pathToJson = savedPathToJson;
         writeSnippetToJson();
     }
