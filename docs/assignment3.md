@@ -380,7 +380,7 @@ _out/artifacts/software_design_vu_2020_jar/software-design-vu-2020.jar_
 ### 30-second video
 Click the image below to view the video
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/watch?v=E64M_YNNRSk)](https://www.youtube.com/watch?v=E64M_YNNRSk)
+[![IMAGE ALT TEXT HERE](Demo.mp4)](Demo.mp4)
 
 ## References
 
