@@ -6,7 +6,9 @@ Author(s): Milos
 - Object diagram now represents classes that actually exist within our application.
 - Removed compositions from our object diagram.
 - Added proper syntax to show class instances in object diagram.
-- Properly adjusted the Multiplicity in our class diagram.
+- Properly adjusted the Multiplicity in our class diagram. But we would like to respectfully disagree about 
+the multiplicity of the association between Snippet and Editor: a snippet can be edited by several editors in practice,
+we even tried it! We're still not sure if we should consider it as a bug or as a feature :). But an editor is only instantiated to edit one single snippet.
 - Created proper state machine diagrams.
 - F1 in our features now only has the split ones.
 - Adjusted the variable name “g” to “gson” in our JsonIO class for better readability.
@@ -14,7 +16,7 @@ Author(s): Milos
 
 ### Application of design patterns
 Author(s): Serghei Mihailov, Yael Goede
-![Class Diagram](DesignPattern.png)
+
 
 | ID  | DP1  | 
 |---|---|
@@ -48,7 +50,7 @@ the snippet itself, and are handled by the method onModification().
 ## Class diagram									
 Author(s): `Yael Goede`, `Milos`, `Serghei Mihailov`
 
-![Class Diagram](UpdatedClassDiagram.png)
+![Class Diagram](FinalClass.png)
 
 ### class: Snippet
 This class represents the snippet objects, and thus contains the meta data and original data from the snippet.
@@ -163,6 +165,8 @@ This class implements the UI, and thus controls the navigation within the menu a
     * same as create but edit.
 * _filterSnippets(): void_
     * same as create but filter. Also prints the output of the snippets that match the filter.
+* _filterSnippets(): void_
+    * same as filter but search. Also prints the output of the snippets ranked by occurences of the word.
 * _quit(): void_
     * stops the ui loop by setting the loop variable `isOpen` to `false`.
 * _runCommandsOnArgs(in args:String): void_
