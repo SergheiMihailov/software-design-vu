@@ -7,27 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a471f4b7-c38c-420c-99b4-288c14ddc065" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/CliUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/CliUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Editor.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Editor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/GistsApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/GistsApi.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/JsonIO$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/JsonIO$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/JsonIO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/JsonIO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Snippet.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Snippet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/SnippetManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/SnippetManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/software_design_vu_2020_jar/software-design-vu-2020.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/software_design_vu_2020_jar/software-design-vu-2020.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/snippo/2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/snippo/3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/snippo/4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/snippo/5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CliUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CliUI.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

@@ -192,5 +192,7 @@ class CliUI {
             System.out.println("Please enter a valid option");
         }
         keyboard.nextLine(); // Gets rid of the stray newline in the buffer
+
+        return input;
     }
 }
