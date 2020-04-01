@@ -88,6 +88,7 @@ public class Snippet {
 
     public void setPathToJson(String pathToJson) {
         this.pathToJson = pathToJson;
+        onModification();
     }
 
     String getTitle() {

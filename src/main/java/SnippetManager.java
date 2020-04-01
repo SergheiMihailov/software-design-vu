@@ -51,7 +51,7 @@ class SnippetManager {
             this.snippets.put(snippetId, snippet);
         }
 
-        // Step C. PATCH (take the version that is latest) for each snippet present on both Gists and local
+        // Step C. PATCH (take the version that is latest) for each snippet present on local
         //         E.g. if last modification was on Gists, the Gist version will be taken.
         //         Otherwise take the local version.
         //         the conflict is resolved at the snippet level
