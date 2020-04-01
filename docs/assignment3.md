@@ -95,15 +95,16 @@ This class represents the snippet objects, and thus contains the meta data and o
 * _clone(Snippet snippetToClone): void_
     * 
 * _syncWithGithubGists(): void_
-    * 
+    * will post a locally created snippet to gist if its not there already.
 * _postSnippetToGithubGists(): void_
-    * 
+    * will post a snippet to github gist
 * _patchSnippetToGithubGists(): void_
-    * 
+    * will patch/update a snippet on github gist
 * _pullSnippetFromGithubGists(): void_
-    * 
+    * will retrieve a snippet from github gist
 * _getGistsId(): String_
-    * 
+    * getter function for the id for the gists in github
+    * getter function for the id for the gists in github
   
 #### Associations
 * _Snippet > JsonIO_
@@ -199,7 +200,7 @@ This class keeps track of all the snippets and is the only class able to modify 
 * _getSnippets(): HashMap<Integer; Snippet>_
     * returns all the managed snippets as an integer-snippet hashmap.
 * _loadSnippetsFromLocal(): void_
-     *
+     *Load all the snippets on the users local machine.
 * _syncWithGithubGistsAtStartup(): void_
      * This function makes sure that on startup, the locally saved snippet and gist saved snippets match. It will first get the local snippets, and then the ones saved on gist. If 2 instances of a snippet are different, it will pick the one that is updated the most recent.
  
@@ -228,7 +229,7 @@ This class takes care of the conversion between string type and Json type using 
 * _onException(e:Exception): void_
     * handles exceptions like file not found or bad data.
 * _parseSnippetsFromGistsApi(String allSnippetsData): List<Snippet>_
-    * 
+    * Function responsible for parsing the gists from github to our snippet format
 * _parseSnippetAttributesFromGistsApi(String snippetData): Snippet_
     * 
 * _snippetToGistsCompatibleObject(Snippet snippet): String_
@@ -269,7 +270,7 @@ This class is responsible for the integration of Githubs Gists with our applicat
 * _authorization: string_
     * .
 * _usesGithub: boolean_
-    * .
+    * boolean that shows wether the user has linked his github or not.
 #### Operations
 * _SnippetManager(pathToSnippoDir:String): void_
     * Constructor function
