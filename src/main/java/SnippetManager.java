@@ -32,14 +32,8 @@ class SnippetManager {
     }
 
     private void syncWithGithubGistsAtStartup() {
-        // Step A. POST local snippets that are not on Gists
-        this.snippets.values().forEach(snippet -> {
-            if (snippet.getGistsId() == null) {
-                snippet.postSnippetToGithubGists();
-            }
-        });
-
         // Step B. GET Gists that are not in the local directory
+        System.out.println("Getting snippets from Gists that are not on local...");
         List<Snippet> loadedSnippets = GistsApi.getInstance().getAllSnippets();
         List<String> localSnippetsIds = new ArrayList<String>();
 
@@ -55,7 +49,6 @@ class SnippetManager {
             Integer snippetId = getNextId();
             snippet.setPathToJson(generatePathToSnippetJson(snippetId));
             this.snippets.put(snippetId, snippet);
-            snippet.writeSnippetToJson();
         }
 
         // Step C. PATCH (take the version that is latest) for each snippet present on both Gists and local
@@ -65,6 +58,7 @@ class SnippetManager {
         //         It made sense to sync all of them as filtering would add too much complexity and most snippets
         //         are present on both Gists and local
 
+        System.out.println("Syncing local and Gists...");
         this.snippets.values().forEach(Snippet::syncWithGithubGists);
 
     }
@@ -77,7 +71,7 @@ class SnippetManager {
         StringBuilder response = new StringBuilder("All snippetsToList: \n");
 
         for (Integer snippetId: snippetsToList.keySet()) {
-            response.append("Id: "+snippetId+"\n").append(snippetsToList.get(snippetId).toString()).append("\n");
+            response.append("Id: "+snippetId+"; ").append(snippetsToList.get(snippetId).toString()).append("\n");
         }
 
         return response.toString();
@@ -92,7 +86,6 @@ class SnippetManager {
         Snippet newSnippet =
                 new Snippet(generatePathToSnippetJson(newSnippetId), title, content, language, null, tags);
         snippets.put(newSnippetId, newSnippet);
-        if (GistsApi.getUsesGithubGists()) newSnippet.postSnippetToGithubGists();
         return newSnippetId;
     }
 

@@ -57,10 +57,12 @@ public class GistsApi {
     void patchSpecificSnippet(Snippet snippet) {
         String gistsCompatibleObject = JsonIO.getInstance().snippetToGistsCompatibleObject(snippet);
         HttpRequest request = buildHttpRequest("PATCH", GITHUB_API_URL + "/" + snippet.getGistsId(), gistsCompatibleObject);
+        sendHttpRequest(request).body();
     }
 
     void deleteSpecificSnippet(String gistId) {
         HttpRequest request = buildHttpRequest("DELETE", GITHUB_API_URL + "/" + gistId, null);
+        sendHttpRequest(request).body();
     }
 
     private HttpResponse<String> sendHttpRequest(HttpRequest request) {

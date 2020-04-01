@@ -23,7 +23,7 @@ public class Snippet {
         this.modifiedDate = new Date();
     }
 
-    void clone (Snippet snippetToClone) {
+    void clone(Snippet snippetToClone) {
         this.pathToJson = snippetToClone.pathToJson;
         this.title = snippetToClone.title;
         this.content = snippetToClone.content;
@@ -32,6 +32,8 @@ public class Snippet {
         this.tags = snippetToClone.tags;
         this.createdDate = snippetToClone.createdDate;
         this.modifiedDate = snippetToClone.modifiedDate;
+
+        onModification();
     }
 
     void edit() {
@@ -44,8 +46,8 @@ public class Snippet {
 
     private void onModification() {
         this.modifiedDate = new Date();
-        writeSnippetToJson();
-        if (GistsApi.getUsesGithubGists()) patchSnippetToGithubGists();
+        if (this.pathToJson != null) writeSnippetToJson();
+        if (GistsApi.getUsesGithubGists()) syncWithGithubGists();
     }
 
     void syncWithGithubGists() {
@@ -63,15 +65,15 @@ public class Snippet {
         }
     }
 
-    void postSnippetToGithubGists() {
+    private void postSnippetToGithubGists() {
         this.gistsId = GistsApi.getInstance().postSpecificSnippet(this);
     }
 
-    void patchSnippetToGithubGists() {
+    private void patchSnippetToGithubGists() {
         GistsApi.getInstance().patchSpecificSnippet(this);
     }
 
-    void pullSnippetFromGithubGists() {
+    private void pullSnippetFromGithubGists() {
         String savedPathToJson = pathToJson;
         this.clone(GistsApi.getInstance().getSpecificSnippet(this.gistsId));
         this.pathToJson = savedPathToJson;
@@ -83,7 +85,7 @@ public class Snippet {
     }
 
     String getTitle() {
-        return title;
+        return title == null ? "" : title;
     }
 
     void setTitle(String title) {
@@ -92,7 +94,7 @@ public class Snippet {
     }
 
     String getContent() {
-        return content;
+        return content == null ? "" : content;
     }
 
     void setContent(String content) {
@@ -101,7 +103,7 @@ public class Snippet {
     }
 
     String getLanguage() {
-        return language;
+        return language == null ? "" : language;
     }
 
     void setLanguage(String language) {
@@ -140,14 +142,15 @@ public class Snippet {
 
     @Override
     public String toString() {
-        return  "PathToJson: " + pathToJson +
-                "\nTitle: " + title +
-                "\nContent: " + content +
-                "\nlanguage: " + language +
-                "\ngistsId: " + gistsId +
-                "\nTags: " + Arrays.toString(tags) +
-                "\nCreated: " + createdDate +
-                "\nModified: " + modifiedDate;
+        return  "\u001B[35mPathToJson: \u001B[0m" + pathToJson +
+                "; \u001B[35mTitle: \u001B[0m" + title +
+                "; \u001B[35mlanguage: \u001B[0m" + language +
+                "; \u001B[35mgistsId: \u001B[0m" + gistsId +
+                "; \u001B[35mTags: \u001B[0m" + Arrays.toString(tags) +
+                "\n\u001B[35mContent: \n\u001B[0m" + content +
+                "\n\u001B[35mCreated: \u001B[0m" + createdDate +
+                "; \u001B[35mModified: \u001B[0m" + modifiedDate +
+                "\n_______________________________________________";
     }
 }
 
