@@ -381,7 +381,3 @@ _out/artifacts/software_design_vu_2020_jar/software-design-vu-2020.jar_
 Click the image below to view the video
 
 [![IMAGE ALT TEXT HERE](Demo.mp4)](Demo.mp4)
-
-## References
-
-References, if needed.
