@@ -25,14 +25,14 @@ Author(s): `name of the team member(s) responsible for this section`
 
 For each application of any design pattern you have to provide a table conforming to the template below.
 
-| ID  | DP1  |
-|---|---|
-| **Design pattern**  | Name of the applied pattern |
-| **Problem**  | A paragraph describing the problem you want to solve |
-| **Solution**  | A paragraph describing why with the application of the design pattern you solve the identified problem |
-| **Intended use**  | A paragraph describing how you intend to use at run-time the objects involved in the applied design patterns (you can refer to small sequence diagrams here if you want to detail how the involved parties interact at run-time |
-| **Constraints**  | Any additional constraints that the application of the design pattern is imposing, if any |
-| **Additional remarks**  | Optional, only if needed |
+| ID  | DP1  | DP1 | DP2 |
+|---|---| --- | --- | 
+| **Design pattern**  | Name of the applied pattern | Singleton Design | Object pool Pattern |
+| **Problem**  | A paragraph describing the problem you want to solve | Some classed in our application should only have one access point to it to ensure its intended use | To optimise for efficiency the application needs to be efficient with expensive resources |
+| **Solution**  | A paragraph describing why with the application of the design pattern you solve the identified problem | This design pattern ensures that a class has only one instance and provides a global point of access to it | This design pattern ensures that the application reuses objects that are expensive to create, end therefore optimises for efficiency for available resources |
+| **Intended use**  | A paragraph describing how you intend to use at run-time the objects involved in the applied design patterns (you can refer to small sequence diagrams here if you want to detail how the involved parties interact at run-time | We will be using this design pattern to ensure our stored data will be accessed and read in a save and correct way by offering a single point of access which we can design and thus control | The main application of this design pattern will be to optimise the use of snippets in our system, creating a lifecycle to minimise disk usage |
+| **Constraints**  | Any additional constraints that the application of the design pattern is imposing, if any | Our solution is also our constraint sinds a big part of our application is now dependend on this pattern to access information. Dependency wise, this is not ideal | * |
+| **Additional remarks**  | Optional, only if needed | * | * |
 
 Maximum number of words for this section: 2000
 
