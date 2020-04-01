@@ -1,5 +1,6 @@
 import java.util.Base64;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -41,8 +42,7 @@ class CliUI {
                 "3. Use Snippo as a guest (no access to Github Gists, only local snippets)"
         );
 
-        int input = keyboard.nextInt();
-        keyboard.nextLine(); // Gets rid of the stray newline in the buffer
+        int input = getIntInput();
 
         switch (input) {
             case 1: {
@@ -80,8 +80,7 @@ class CliUI {
     }
 
     private void executeCommand() {
-        int input = keyboard.nextInt();
-        keyboard.nextLine(); // Gets rid of the stray newline in the buffer
+        int input = getIntInput();
 
         switch (input) {
             case 1: System.out.println(snippetManager.listAll()); break;
@@ -110,15 +109,13 @@ class CliUI {
 
     private void deleteSnippet() {
         System.out.println("Enter the id of the snippet to delete:");
-        int input = keyboard.nextInt();
-        keyboard.nextLine(); // Gets rid of the stray newline in the buffer
+        int input = getIntInput();
         snippetManager.delete(input);
     }
 
     private void editSnippet() {
         System.out.println("Enter the id of the snippet to edit");
-        Integer snippetId = keyboard.nextInt();
-        keyboard.nextLine(); // Gets rid of the stray newline in the buffer
+        Integer snippetId = getIntInput();
         snippetManager.edit(snippetId);
     }
 
@@ -181,5 +178,19 @@ class CliUI {
                 System.out.println("Unrecognized command. Exiting...");
                 break;
         }
+    }
+
+    int getIntInput() {
+        int input = 0;
+
+        try {
+            input = keyboard.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Please enter a number");
+        }
+        if (input < 1 || input > 7) {
+            System.out.println("Please enter a valid option");
+        }
+        keyboard.nextLine(); // Gets rid of the stray newline in the buffer
     }
 }
