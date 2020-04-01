@@ -102,7 +102,7 @@ This class represents the snippet objects, and thus contains the meta data and o
 * _toString(): String_
     * Combines all the field of the snippet object into a readable String.
 * _clone(Snippet snippetToClone): void_
-    * 
+    * a helper function for the parser that parses gist objects to our snippet objects
 * _syncWithGithubGists(): void_
     * will post a locally created snippet to gist if its not there already.
 * _postSnippetToGithubGists(): void_
@@ -113,7 +113,7 @@ This class represents the snippet objects, and thus contains the meta data and o
     * will retrieve a snippet from github gist
 * _getGistsId(): String_
     * getter function for the id for the gists in github
-    * getter function for the id for the gists in github
+  
   
 #### Associations
 * _Snippet > JsonIO_
@@ -242,9 +242,9 @@ This class takes care of the conversion between string type and Json type using 
 * _parseSnippetAttributesFromGistsApi(String snippetData): Snippet_
     * 
 * _snippetToGistsCompatibleObject(Snippet snippet): String_
-    * 
+    * responsible for parsing a gist snippet to our own snippet object
 * _getAsStringIncludingNull(JsonObject obj, String attribute): String_
-    * 
+    * transforms objects into a string, a helper function for the parser.
 #### Associations
 * _JsonIO < Main_
     * already described
@@ -272,12 +272,13 @@ This class takes care of the conversion between string type and Json type using 
     * instantiates.
 
 ### class: GistsApi
+
 This class is responsible for the integration of Githubs Gists with our application
 #### Attributes
 * _httpClient: String: HttpClient_
-    * .
+    * HttpClient object.
 * _authorization: string_
-    * .
+    * authorization token that github uses.
 * _usesGithub: boolean_
     * boolean that shows wether the user has linked his github or not.
 #### Operations
@@ -286,7 +287,7 @@ This class is responsible for the integration of Githubs Gists with our applicat
 * _getInstance(): GistsApi_
     * returns instance of the GistsApi singleton.
 * _setAuthorization(String providedAuthorization): Void_
-    * .
+    * set the authorization token to the one the users has provided on login.
 * _setUsesGithub(boolean providedUsesGithub): Void_
     * boolean that shows wether or not the user is using github gists integration
 * _getUsesGithubGists(): Boolean_
@@ -302,18 +303,18 @@ This class is responsible for the integration of Githubs Gists with our applicat
 * _deleteSpecificSnippet(String gistId): Void_
     * deletes a specific snippet from gist
 * _sendHttpRequest(HttpRequest request):HttpResponse<String>
-    * .
+    * send a http request, used to send the request to the Gists api.
 * _buildHttpRequest(String method, String url, String body): HttpRequest_
-    * .
+    * build a http request, used to build the reqeusts we send to the Gists api
 * _onException(Exception e): Void_
-    * .
+    * handles errors.
 #### Associations
-* __
-    *  .
-* __
-    * 
-* __
-    * 
+* GistsApi > SnippetManager 
+    *  provides api.
+* GistsApi > snippet
+    * provides api.
+* GistsApi > JSonIo
+    * provides api.
 ## Object diagrams								
 Author(s): Yael Goede
 
@@ -396,7 +397,9 @@ Author(s): `Serghei`, `Milos`
     * Week 1 (17.02-23.02): Brainstorm the application. We went back and forth discussing requirements and implementation. Sketch the first class and sequence diagram. First class diagram: CliUI -> Snippet Manager -> Snippet -> Editor. (include pic)
 	* Week 2 (24.02-01.03): Minimum functional app including all the classes described in the class model and the main features (CRUD, basic CLI UI, filtering, snippet persistence using json and import/export). As we were developing the app it became easier to see the structural dependencies between classes and to adjust our class diagram as well as add new relevant classes (like the singleton JsonIO for managing json read/write). We also adjusted the sequence diagrams to better model the calls made between the classes as they grew in complexity.
 	* Week 3 (02.03-08.03): We spent this week adjusting our code to the revisited class and sequence models and to properly place the complexity inside the right classes. For instance we made the editor to only interface with the Snippet class and removed its usages inside the SnippetManager class. This way we removed an unnecessary responsibility from the SnippetManager and decreased the complexity of the project. Moreover, we added new features and polished the existing ones. The editor was implemented and allowed for a simpler modification of snippets with syntax highlighting. Instead of saving all snippets in one json file, the app now uses a directory with one file per snippet, which made export and import easier. Finally, we created the state machine and the object diagrams to describe the behavior of our app.
-
+    * Week 4 (9.03-15.03):  We used this week to adress feedback from assignment 2, adjust our diagrams according to that feedback, and plan the next steps for our application
+    * Week 5 (16.03-22.03): worked on integrating github Gist api with our application and implementing the search functionality.
+    * week 6 (23.03-29.03): We adjusted our diagrams according to the finalized code of our application.
 ### Key Solution
 There were two key solutions that made developing the app easier: `org.fife.ui.rsyntaxtextarea` library for syntax highlighting and `com.google.gson.Gson` for serializing and deserializing snippets. They provided a lot of utility while saving development time and reducing the complexity of the project. If we were to write our own syntax highlighting engine, it would have taken us enormous effort to come up with the requirements and an implementation, let alone collecting all the necessary data about syntax of programming languages. The same applies to Gson.
 
