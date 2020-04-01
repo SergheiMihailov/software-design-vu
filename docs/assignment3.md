@@ -7,11 +7,16 @@ Maximum number of words for this document: 18000
 **Format**: establish formatting conventions when describing your models in this document. For example, you style the name of each class in bold, whereas the attributes, operations, and associations as underlined text, objects are in italic, etc.
 
 ### Summary of changes of Assignment 2
-Author(s): `name of the team member(s) responsible for this section`
+Author(s): Milos
 
-Provide a bullet list summarizing all the changes you performed in Assignment 2 for addressing our feedback.
-
-Maximum number of words for this section: 1000
+- Object diagram now represents classes that actually exist within our application.
+- Removed compositions from our object diagram.
+- Added proper syntax to show class instances in object diagram.
+- Properly adjusted the Multiplicity in our class diagram.
+- Created proper state machine diagrams.
+- F1 in our features now only has the split ones.
+- Adjusted the variable name “g” to “gson” in our JsonIO class for better readability.
+- Our CliUI no longer crashes when user inputs an invalid character.
 
 ### Application of design patterns
 Author(s): `name of the team member(s) responsible for this section`
